@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="ServerApp.Controls.Palette"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontWeight" Value="DemiBold" />
+                <Setter Property="Margin" Value="4" />
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Border Background="{DynamicResource PrimaryHueMidBrush}" Grid.ColumnSpan="3">
+            <TextBlock Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">主要色调</TextBlock>
+        </Border>
+        <Border Background="{DynamicResource PrimaryHueLightBrush}"
+                Grid.Row="1" Grid.Column="0">
+            <TextBlock FontWeight="Bold" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}">高对比度</TextBlock>
+        </Border>
+        <Border Background="{DynamicResource PrimaryHueMidBrush}"
+                Grid.Row="1" Grid.Column="1">
+            <TextBlock Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">一般</TextBlock>
+        </Border>
+        <Border Background="{DynamicResource PrimaryHueDarkBrush}"
+                Grid.Row="1" Grid.Column="2">
+            <TextBlock Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">低对比度</TextBlock>
+        </Border>
+        <Border Background="{DynamicResource SecondaryAccentBrush}"
+                Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="0">
+            <TextBlock Foreground="{DynamicResource SecondaryAccentForegroundBrush}">重标颜色</TextBlock>
+        </Border>
+    </Grid>
+</UserControl>

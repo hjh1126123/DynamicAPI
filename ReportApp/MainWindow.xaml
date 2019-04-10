@@ -1,0 +1,114 @@
+﻿<Window x:Class="ServerApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iNotify="clr-namespace:ServerApp.INotify"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="15"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        mc:Ignorable="d"
+        Title="海带宝监控控制维护端" Height="768" Width="1080">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel MinWidth="212">
+                    <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                    DockPanel.Dock="Top"
+                                    HorizontalAlignment="Right" Margin="16"
+                                    IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}">
+                    </ToggleButton>
+                    <ListBox x:Name="NavListBox" Margin="0 16 0 16" SelectedIndex="0"                         
+                             ItemsSource="{Binding RouterItems}"
+                             PreviewMouseLeftButtonUp="NavListBox_PreviewMouseLeftButtonUp">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="iNotify:RouterItem">
+                                <TextBlock Text="{Binding Name}" Margin="32 0 32 0" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+            <DockPanel>
+                <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                            Mode="PrimaryMid" DockPanel.Dock="Top" MouseLeftButtonDown="DragMove">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="160"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                                      Grid.Column="0"
+                                      IsChecked="False"
+                                      x:Name="MenuToggleButton"/>
+                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                            <!--<Button
+                            Name="minBtn"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            HorizontalAlignment="Center"
+                            Click="Minimized"
+                            >
+                                <materialDesign:PackIcon
+                                Kind="WindowMinimize" 
+                                Height="20"
+                                Width="20"
+                                VerticalAlignment="Center"/>
+                            </Button>
+                            <Button
+                            Name="maxBtn"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            HorizontalAlignment="Center"
+                            Click="Maximized">
+                                <materialDesign:PackIcon
+                                Kind="WindowMaximize"
+                                VerticalAlignment="Center"
+                                Height="20"
+                                Width="20"/>
+                            </Button>
+                            <Button
+                            Name="closeBtn"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            HorizontalAlignment="Center"
+                            Click="Close">
+                                <materialDesign:PackIcon
+                                Kind="Close"
+                                VerticalAlignment="Center"
+                                Height="20"
+                                Width="20"/>
+                            </Button>-->
+                        </StackPanel>
+                    </Grid>
+                </materialDesign:ColorZone>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <ScrollViewer Grid.Row="1" 
+                                  HorizontalScrollBarVisibility="{Binding ElementName=NavListBox, Path=SelectedItem.HorizontalScrollBarVisibilityRequirement}"
+                                  VerticalScrollBarVisibility="{Binding ElementName=NavListBox, Path=SelectedItem.VerticalScrollBarVisibilityRequirement}" 
+                                  Padding="{Binding ElementName=NavListBox, Path=SelectedItem.MarginRequirement}">
+                        <ContentControl Content="{Binding ElementName=NavListBox, Path=SelectedItem.Content}" />
+                    </ScrollViewer>
+                    <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar"
+                                            Grid.Row="1" x:FieldModifier="public"/>
+                </Grid>
+            </DockPanel>
+        </materialDesign:DrawerHost>
+    </materialDesign:DialogHost>
+</Window>
