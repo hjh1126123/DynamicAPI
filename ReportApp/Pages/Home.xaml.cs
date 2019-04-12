@@ -14,9 +14,9 @@ namespace ServerApp.Pages
         {
             InitializeComponent();
 
-            DataContext = new HomeNotify(new List<HomeModel>
+            DataContext = new HomeNotify(new List<MHome>
             {
-                new HomeModel( "版本 1.0.0.0",
+                new MHome( "版本 1.0.0.0",
                 "1.底层架构全面升级\n" +
                 "2.SQL可以动态维护\n" +
                 "3.本地保存使用SQLite\n" +

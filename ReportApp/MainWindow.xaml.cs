@@ -31,7 +31,7 @@ namespace ServerApp
                 MainSnackbar.MessageQueue.Enqueue("欢迎来到海带宝报表监控服务端控制器");
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
-            DataContext = new MainWindowViewModel(MainSnackbar.MessageQueue);
+            DataContext = new MMainWindow(MainSnackbar.MessageQueue);
 
             Snackbar = MainSnackbar;
         }

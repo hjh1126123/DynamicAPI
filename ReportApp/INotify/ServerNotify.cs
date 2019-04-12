@@ -8,16 +8,16 @@ namespace ServerApp.INotify
 {
     public class ServerNotify : INotifyPropertyChanged
     {
-        IEnumerable<ServerControlModel> serverControlModels;
+        IEnumerable<MServerControl> serverControlModels;
 
         public ServerNotify() { }
 
-        public ServerNotify(IEnumerable<ServerControlModel> serverControlModel)
+        public ServerNotify(IEnumerable<MServerControl> serverControlModel)
         {
             serverControlModels = serverControlModel;
         }
 
-        public IEnumerable<ServerControlModel> ServerControls
+        public IEnumerable<MServerControl> ServerControls
         {
             get { return serverControlModels; }
             set { this.MutateVerbose(ref serverControlModels, value, RaisePropertyChanged()); }

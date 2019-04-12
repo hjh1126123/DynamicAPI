@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServerApp.Model
 {
-    public class HomeModel
+    public class MHome
     {
         public string Version { get; }
 
@@ -14,7 +14,7 @@ namespace ServerApp.Model
 
         public string UpdateVersion { get; }
 
-        public HomeModel(string version,string versionFeature,string updateVersion)
+        public MHome(string version,string versionFeature,string updateVersion)
         {
             Version = version;
             VersionFeature = versionFeature;

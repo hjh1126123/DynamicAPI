@@ -2,9 +2,18 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"              
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             
+             xmlns:iNotify="clr-namespace:ServerApp.INotify"
+             xmlns:model="clr-namespace:ServerApp.Model"
+             
+             mc:Ignorable="d"             
+             
+             d:DataContext="{d:DesignInstance iNotify:SQLMaintenanceNotify, IsDesignTimeCreatable=False}"
+             d:DesignHeight="450" d:DesignWidth="800"
+             
+             Loaded="SQLMaintenanceLoaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -13,19 +22,21 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <StackPanel Orientation="Vertical">
-                <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}">列</TextBlock>
-                <ListBox IsEnabled="{Binding IsChecked, ElementName=EnableListBox}">
-                    <!--<ListBox.ItemTemplate>
-                        <DataTemplate>-->
-                            <TextBlock Text="数据异常表">
-                                
-                            </TextBlock>
-                        <!--</DataTemplate>
-                    </ListBox.ItemTemplate>-->
-                    <!--<TextBlock>Plain</TextBlock>
-                    <TextBlock>Old</TextBlock>
-                    <TextBlock>ListBox</TextBlock>
-                    <TextBlock>Full of junk</TextBlock>-->
+                <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}">业务组</TextBlock>
+                <ListBox ItemsSource="{Binding SQLMaintenanceModel.SqlGroup,Mode=OneWay}">
+                    <ListBox.ItemTemplate>
+                        <!--<i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SQLMaintenanceModel.ChangeGroupAction}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>-->
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Text}"></TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <!--<ListBox.SelectedItem>
+                        
+                    </ListBox.SelectedItem>-->
                 </ListBox>
             </StackPanel>
         </Grid>

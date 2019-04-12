@@ -6,9 +6,9 @@ using System.Windows.Input;
 
 namespace ServerApp.Model
 {
-    public class PaletteSelectorViewModel
+    public class MPaletteSelector
     {
-        public PaletteSelectorViewModel()
+        public MPaletteSelector()
         {
             Swatches = new SwatchesProvider().Swatches;            
         }

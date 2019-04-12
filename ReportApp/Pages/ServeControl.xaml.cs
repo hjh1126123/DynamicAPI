@@ -8,23 +8,23 @@ namespace ServerApp.Pages
     /// <summary>
     /// ServeControl.xaml 的交互逻辑
     /// </summary>
-    public partial class ServerControl : UserControl
+    public partial class Server : UserControl
     {
-        ServerNotify serverCardItem;
+        ServerNotify serverNotify;
 
-        public ServerControl()
+        public Server()
         {
             InitializeComponent();
 
-            if (serverCardItem == null)
-                serverCardItem = new ServerNotify();
+            if (serverNotify == null)
+                serverNotify = new ServerNotify();
 
-            DataContext = serverCardItem;
+            DataContext = serverNotify;
         }
 
         private void ServerControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            serverCardItem.ServerControls = new List<ServerControlModel>
+            serverNotify.ServerControls = new List<MServerControl>
             {
                  // new ServerControlModel(
                  //   "pack://application:,,,/Resources/Img/Wcf.png",
@@ -57,10 +57,10 @@ namespace ServerApp.Pages
 
         private void ServerControl_Unloaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            foreach (var serverModel in serverCardItem.ServerControls)
-            {
-                serverModel.Dispose();
-            }
+            //foreach (var serverModel in serverCardItem.ServerControls)
+            //{
+            //    serverModel.Dispose();
+            //}
         }
     }
 }

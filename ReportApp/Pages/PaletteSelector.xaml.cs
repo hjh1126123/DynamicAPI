@@ -12,7 +12,7 @@ namespace ServerApp.Pages
         {
             InitializeComponent();
 
-            DataContext = new PaletteSelectorViewModel();
+            DataContext = new MPaletteSelector();
         }
     }
 }

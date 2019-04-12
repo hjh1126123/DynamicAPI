@@ -9,16 +9,16 @@ namespace ServerApp.INotify
 {
     public class HomeNotify : INotifyPropertyChanged
     {
-        IEnumerable<HomeModel> homeModels;
+        IEnumerable<MHome> homeModels;
 
         public HomeNotify() { }
 
-        public HomeNotify(IEnumerable<HomeModel> homeModels)
+        public HomeNotify(IEnumerable<MHome> homeModels)
         {
             this.homeModels = homeModels;
         }
 
-        public IEnumerable<HomeModel> HomeModels
+        public IEnumerable<MHome> HomeModels
         { get { return homeModels; } set { this.MutateVerbose(ref homeModels, value, RaisePropertyChanged()); } }
 
         public event PropertyChangedEventHandler PropertyChanged;

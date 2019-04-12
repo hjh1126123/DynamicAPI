@@ -18,7 +18,7 @@
                 <!-- throw in some extra colour for our floating action button -->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Green.Named.Primary.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <DataTemplate DataType="{x:Type model:HomeModel}">
+            <DataTemplate DataType="{x:Type model:MHome}">
                 <materialDesign:Card Width="600" Margin="8 2 4 16" Height="270">
                     <Grid VerticalAlignment="Stretch">
                         <Grid.RowDefinitions>

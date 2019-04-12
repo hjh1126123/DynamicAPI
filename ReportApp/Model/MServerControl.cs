@@ -8,13 +8,9 @@ using System.Windows.Input;
 
 namespace ServerApp.Model
 {
-    public class ServerControlModel : IDisposable
+    public class MServerControl
     {
-        bool checkState;
-        public void Dispose()
-        {
-            checkState = false;
-        }
+        private bool checkState;
 
         /// <summary>
         /// 服务卡片控件
@@ -24,7 +20,7 @@ namespace ServerApp.Model
         /// <param name="cardTitle">卡片标题</param>
         /// <param name="cardText">卡片内容</param>
         /// <param name="setButtonToolTip">设置按钮提示</param>
-        public ServerControlModel(string source, string playBtnToolTip, string cardTitle, string cardText, string setButtonToolTip, Func<bool> CheckState, IServeTemplate serveTemplate)
+        public MServerControl(string source, string playBtnToolTip, string cardTitle, string cardText, string setButtonToolTip, Func<bool> CheckState, IServeTemplate serveTemplate)
         {
             Source = source;
             PlayButtonToolTip = playBtnToolTip;

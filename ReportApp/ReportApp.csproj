@@ -60,6 +60,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="INotify\SQLMaintenanceNotify.cs" />
+    <Compile Include="Model\MSQLMaintenance.cs" />
     <Compile Include="ServeTemplate\IServeTemplate.cs" />
     <Page Include="Controls\Palette.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -104,16 +106,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\SqlMaintenance.xaml">
+    <Page Include="Pages\SQLMaintenance.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\HomeModel.cs" />
-    <Compile Include="Model\MainWindowViewModel.cs" />
-    <Compile Include="Model\PaletteSelectorViewModel.cs" />
-    <Compile Include="Model\ServerControlModel.cs" />
+    <Compile Include="Model\MHome.cs" />
+    <Compile Include="Model\MMainWindow.cs" />
+    <Compile Include="Model\MPaletteSelector.cs" />
+    <Compile Include="Model\MServerControl.cs" />
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -123,8 +125,8 @@
     <Compile Include="Pages\ServeControl.xaml.cs">
       <DependentUpon>ServeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SqlMaintenance.xaml.cs">
-      <DependentUpon>SqlMaintenance.xaml</DependentUpon>
+    <Compile Include="Pages\SQLMaintenance.xaml.cs">
+      <DependentUpon>SQLMaintenance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
