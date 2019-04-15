@@ -2,6 +2,7 @@
 using ServerApp.Model;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using System;
 
 namespace ServerApp.Pages
 {
@@ -52,6 +53,36 @@ namespace ServerApp.Pages
                     {
                         Id = 4,
                         Text = "分组5"
+                    },
+                    new MSQLMaintenance.BoxItem
+                    {
+                        Id = 4,
+                        Text = "分组6"
+                    },
+                    new MSQLMaintenance.BoxItem
+                    {
+                        Id = 4,
+                        Text = "分组7"
+                    },
+                    new MSQLMaintenance.BoxItem
+                    {
+                        Id = 4,
+                        Text = "分组8"
+                    },
+                    new MSQLMaintenance.BoxItem
+                    {
+                        Id = 4,
+                        Text = "分组9"
+                    },
+                    new MSQLMaintenance.BoxItem
+                    {
+                        Id = 4,
+                        Text = "分组10"
+                    },
+                    new MSQLMaintenance.BoxItem
+                    {
+                        Id = 4,
+                        Text = "分组11"
                     }
                 };
             List<MSQLMaintenance.BoxItem> sqlActive = new List<MSQLMaintenance.BoxItem>
@@ -85,11 +116,6 @@ namespace ServerApp.Pages
                 };
 
             SQLMaintenanceNotify.SQLMaintenanceModel = new MSQLMaintenance(sqlType, sqlActive, "select * from all");
-        }
-
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

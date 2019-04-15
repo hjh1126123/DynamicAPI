@@ -1,8 +1,7 @@
 ﻿using ServerApp.Command;
-using System.Collections.Generic;
 using System.Windows.Input;
-using System;
-using System.Windows.Controls;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace ServerApp.Model
 {
@@ -10,26 +9,20 @@ namespace ServerApp.Model
     {
         public struct BoxItem
         {
-            private int id;
-            private string text;
-
-            public int Id { get => id; set => id = value; }
-            public string Text { get => text; set => text = value; }
+            public int Id { get; set; }
+            public string Text { get; set; }
         }
+        
+        public ObservableCollection<BoxItem> SqlGroup { get ; set; }
+        public ObservableCollection<BoxItem> SqlActive { get; set; }
+        public string Sql { get; set; }
 
-        private IEnumerable<BoxItem> sqlGroup;
-        private IEnumerable<BoxItem> sqlActive;
-        private string sql;
-
-        public IEnumerable<BoxItem> SqlGroup { get => sqlGroup; set => sqlGroup = value; }
-        public IEnumerable<BoxItem> SqlActive { get => sqlActive; set => sqlActive = value; }
-        public string Sql { get => sql; set => sql = value; }
-
-        public MSQLMaintenance(IEnumerable<BoxItem> sqlType, IEnumerable<BoxItem> sqlActive, string sql)
+        public MSQLMaintenance(List<BoxItem> sqlGroup, List<BoxItem> sqlActive, string sql)
         {
-            this.sqlGroup = sqlType;
-            this.sqlActive = sqlActive;
-            this.sql = sql;
+
+            SqlGroup = new ObservableCollection<BoxItem>(sqlGroup);
+            SqlActive = new ObservableCollection<BoxItem>(sqlActive);
+            Sql = sql;
         }
 
         public ICommand ChangeGroupAction
@@ -41,7 +34,7 @@ namespace ServerApp.Model
         }
         private void ChangeGroup(object o)
         {
-            Console.WriteLine(o);
+            SqlActive.Clear();
         }
 
         public ICommand ChangeActiveAction
@@ -53,7 +46,7 @@ namespace ServerApp.Model
         }
         private void ChangeActive(object o)
         {
-            Console.WriteLine(o);
+            
         }
     }
 }

@@ -1,51 +1,275 @@
-﻿<UserControl x:Class="ServerApp.Pages.SQLMaintenance"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
-             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             
-             xmlns:iNotify="clr-namespace:ServerApp.INotify"
-             xmlns:model="clr-namespace:ServerApp.Model"
-             
-             mc:Ignorable="d"             
-             
-             d:DataContext="{d:DesignInstance iNotify:SQLMaintenanceNotify, IsDesignTimeCreatable=False}"
-             d:DesignHeight="450" d:DesignWidth="800"
-             
-             Loaded="SQLMaintenanceLoaded">
+﻿<UserControl
+    x:Class="ServerApp.Pages.SQLMaintenance"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:iNotify="clr-namespace:ServerApp.INotify"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance iNotify:SQLMaintenanceNotify,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Loaded="SQLMaintenanceLoaded"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ComboBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Slider.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <ItemsPanelTemplate x:Key="M_ListBoxTemplate">
+                <VirtualizingStackPanel IsItemsHost="True">
+                    <i:Interaction.Behaviors>
+                        <ei:FluidMoveBehavior AppliesTo="Children" Duration="0:0:1">
+                            <ei:FluidMoveBehavior.EaseY>
+                                <CircleEase EasingMode="EaseOut" />
+                            </ei:FluidMoveBehavior.EaseY>
+                        </ei:FluidMoveBehavior>
+                    </i:Interaction.Behaviors>
+                </VirtualizingStackPanel>
+            </ItemsPanelTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="8*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="8*" />
+            <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}">业务组</TextBlock>
-                <ListBox ItemsSource="{Binding SQLMaintenanceModel.SqlGroup,Mode=OneWay}">
-                    <ListBox.ItemTemplate>
-                        <!--<i:Interaction.Triggers>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="0,0,0,10">
+                <GroupBox Header="脚本组">
+                    <ListBox ItemsPanel="{DynamicResource M_ListBoxTemplate}" ItemsSource="{Binding SQLMaintenanceModel.SqlGroup, Mode=OneWay}">
+                        <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding SQLMaintenanceModel.ChangeGroupAction}" />
+                                <i:InvokeCommandAction Command="{Binding SQLMaintenanceModel.ChangeGroupAction}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}, Path=SelectedItem}" />
                             </i:EventTrigger>
-                        </i:Interaction.Triggers>-->
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Text}"></TextBlock>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    <!--<ListBox.SelectedItem>
-                        
-                    </ListBox.SelectedItem>-->
-                </ListBox>
-            </StackPanel>
+                        </i:Interaction.Triggers>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Text, Mode=OneWay}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </GroupBox>
+            </Grid>
+            <Grid Grid.Row="1" Margin="0,10,0,0">
+                <GroupBox Header="脚本业务">
+                    <ListBox ItemsPanel="{DynamicResource M_ListBoxTemplate}" ItemsSource="{Binding SQLMaintenanceModel.SqlActive, Mode=OneWay}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SQLMaintenanceModel.ChangeActiveAction}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}, Path=SelectedItem}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Text, Mode=OneWay}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </GroupBox>
+            </Grid>
         </Grid>
         <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="44*"/>
-                <RowDefinition Height="31*"/>
-            </Grid.RowDefinitions>
+            <materialDesign:DialogHost>
+                <materialDesign:DialogHost.DialogContent>
+                    <Grid
+                        Width="600"
+                        Height="800"
+                        Margin="10">
+                        <DockPanel>
+                            <TextBlock
+                                Margin="10"
+                                HorizontalAlignment="Center"
+                                DockPanel.Dock="Top"
+                                Style="{StaticResource MaterialDesignDisplay1TextBlock}">
+                                请在下面修改你的SQL
+                            </TextBlock>
+                            <StackPanel
+                                HorizontalAlignment="Right"
+                                DockPanel.Dock="Bottom"
+                                Orientation="Horizontal">
+                                <Button
+                                    Command="materialDesign:DialogHost.CloseDialogCommand"
+                                    IsDefault="True"
+                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    <Button.CommandParameter>
+                                        <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                            True
+                                        </system:Boolean>
+                                    </Button.CommandParameter>
+                                    确定
+                                </Button>
+                                <Button
+                                    Margin="10,0,0,0"
+                                    Command="materialDesign:DialogHost.CloseDialogCommand"
+                                    IsCancel="True"
+                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    <Button.CommandParameter>
+                                        <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                            False
+                                        </system:Boolean>
+                                    </Button.CommandParameter>
+                                    取消
+                                </Button>
+                            </StackPanel>
+                            <TextBox
+                                x:Name="FruitTextBox"
+                                Margin="20"
+                                materialDesign:HintAssist.Hint="SQL语句"
+                                AcceptsReturn="True"
+                                Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto" />
+                        </DockPanel>
+                    </Grid>
+                </materialDesign:DialogHost.DialogContent>
+                <Grid>
+                    <GroupBox
+                        Margin="16"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                        BorderThickness="0"
+                        Header="Shadow Header"
+                        Style="{DynamicResource MaterialDesignGroupBox}">
+                        <TextBlock
+                            Margin="6"
+                            VerticalAlignment="Top"
+                            Text="{Binding SQLMaintenanceModel.Sql}"
+                            TextWrapping="Wrap" />
+                    </GroupBox>
+                    <Button
+                        Grid.Row="0"
+                        Margin="0,0,20,20"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                        ToolTip="编辑SQL语句"
+                        ToolTipService.Placement="Right">
+                        <materialDesign:PackIcon
+                            Width="22"
+                            Height="22"
+                            Kind="Edit" />
+                    </Button>
+                </Grid>
+            </materialDesign:DialogHost>
         </Grid>
-        <Grid Grid.Column="2"></Grid>
+        <Grid Grid.Column="2">
+            <GroupBox Header="参数">
+                <ListBox ItemsPanel="{DynamicResource M_ListBoxTemplate}">
+                    <!--<i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SQLMaintenanceModel.ChangeActiveAction}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}, Path=SelectedItem}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>-->
+                    <!--<ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Text, Mode=OneWay}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>-->
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}">
+                        初始时间：@time
+                    </TextBlock>
+                </ListBox>
+            </GroupBox>
+        </Grid>
     </Grid>
 </UserControl>

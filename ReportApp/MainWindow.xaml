@@ -56,42 +56,7 @@
                                       Grid.Column="0"
                                       IsChecked="False"
                                       x:Name="MenuToggleButton"/>
-                        <StackPanel Grid.Column="2" Orientation="Horizontal">
-                            <!--<Button
-                            Name="minBtn"
-                            Style="{StaticResource MaterialDesignRaisedButton}"
-                            HorizontalAlignment="Center"
-                            Click="Minimized"
-                            >
-                                <materialDesign:PackIcon
-                                Kind="WindowMinimize" 
-                                Height="20"
-                                Width="20"
-                                VerticalAlignment="Center"/>
-                            </Button>
-                            <Button
-                            Name="maxBtn"
-                            Style="{StaticResource MaterialDesignRaisedButton}"
-                            HorizontalAlignment="Center"
-                            Click="Maximized">
-                                <materialDesign:PackIcon
-                                Kind="WindowMaximize"
-                                VerticalAlignment="Center"
-                                Height="20"
-                                Width="20"/>
-                            </Button>
-                            <Button
-                            Name="closeBtn"
-                            Style="{StaticResource MaterialDesignRaisedButton}"
-                            HorizontalAlignment="Center"
-                            Click="Close">
-                                <materialDesign:PackIcon
-                                Kind="Close"
-                                VerticalAlignment="Center"
-                                Height="20"
-                                Width="20"/>
-                            </Button>-->
-                        </StackPanel>
+                        <StackPanel Grid.Column="2" Orientation="Horizontal"></StackPanel>
                     </Grid>
                 </materialDesign:ColorZone>
                 <Grid>
