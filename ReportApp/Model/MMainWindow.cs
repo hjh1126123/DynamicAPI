@@ -15,9 +15,10 @@ namespace ServerApp.Model
 
             RouterItems = new[]
             {
-                new RouterNotify("主页", new Home()),                
+                new RouterNotify("主页", new Home()),
                 new RouterNotify("服务", new Server()),
-                new RouterNotify("SQL维护", new SQLMaintenance()),
+                new RouterNotify("业务添加", new BLLAdd()),
+                new RouterNotify("业务查看", new BLLQuery()),
                 new RouterNotify("主题修改",new PaletteSelector())
             };
         }

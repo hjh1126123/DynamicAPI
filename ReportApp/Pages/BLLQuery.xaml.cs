@@ -9,11 +9,11 @@ namespace ServerApp.Pages
     /// <summary>
     /// Setting.xaml 的交互逻辑
     /// </summary>
-    public partial class SQLMaintenance : UserControl
+    public partial class BLLQuery : UserControl
     {
         SQLMaintenanceNotify SQLMaintenanceNotify;
 
-        public SQLMaintenance()
+        public BLLQuery()
         {
             InitializeComponent();
 

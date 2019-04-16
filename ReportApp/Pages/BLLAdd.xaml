@@ -1,0 +1,123 @@
+﻿<UserControl
+    x:Class="ServerApp.Pages.BLLAdd"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:iNotify="clr-namespace:ServerApp.INotify"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0" Margin="10,20,10,20">
+            <ComboBox
+                materialDesign:HintAssist.Hint="组"
+                materialDesign:HintAssist.HintOpacity=".26"
+                DockPanel.Dock="Top"
+                IsEditable="True">
+                <ComboBoxItem>
+                    Apple
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    Banana
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    Pear
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    Orange
+                </ComboBoxItem>
+            </ComboBox>
+            <TextBox
+                Margin="0,10,0,0"
+                materialDesign:HintAssist.Hint="业务"
+                DockPanel.Dock="Top"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <materialDesign:DialogHost Margin="0,10,0,0" DockPanel.Dock="Top">
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel Margin="16">
+                        <TextBlock>
+                            Add a new fruit.
+                        </TextBlock>
+                        <TextBox x:Name="ParamTextBox" HorizontalAlignment="Stretch" />
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <Button
+                                Command="materialDesign:DialogHost.CloseDialogCommand"
+                                IsDefault="True"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                                <Button.CommandParameter>
+                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                        True
+                                    </system:Boolean>
+                                </Button.CommandParameter>
+                                ACCEPT
+                            </Button>
+                            <Button
+                                Command="materialDesign:DialogHost.CloseDialogCommand"
+                                IsCancel="True"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                                <Button.CommandParameter>
+                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                        False
+                                    </system:Boolean>
+                                </Button.CommandParameter>
+                                CANCEL
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:DialogHost.DialogContent>
+                <Border
+                    BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                    BorderThickness="1"
+                    ClipToBounds="True">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ListBox x:Name="ParamListBox" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <!--<ListBoxItem>
+                                Apple
+                            </ListBoxItem>-->
+                        </ListBox>
+                        <materialDesign:ColorZone
+                            Grid.Row="1"
+                            Effect="{DynamicResource MaterialDesignShadowDepth5}"
+                            Mode="PrimaryMid">
+                            <TextBlock Margin="16">
+                                添加参数
+                            </TextBlock>
+                        </materialDesign:ColorZone>
+                        <Button
+                            Grid.Row="0"
+                            Margin="0,20,0,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                            <materialDesign:PackIcon
+                                Width="22"
+                                Height="22"
+                                Kind="Plus" />
+                        </Button>
+                    </Grid>
+                </Border>
+            </materialDesign:DialogHost>
+        </DockPanel>
+        <TextBox
+            Grid.Column="1"
+            Margin="20"
+            materialDesign:HintAssist.Hint="输入SQL"
+            AcceptsReturn="True"
+            Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Auto" />
+    </Grid>
+</UserControl>
