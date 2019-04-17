@@ -7,8 +7,8 @@ namespace ServerApp.INotify
 {
     public class SQLMaintenanceNotify : INotifyPropertyChanged
     {
-        private MSQLMaintenance sQLMaintenanceModel;
-        public MSQLMaintenance SQLMaintenanceModel
+        private MBLLQuery sQLMaintenanceModel;
+        public MBLLQuery SQLMaintenanceModel
         {
             get { return sQLMaintenanceModel; }
             set { this.MutateVerbose(ref sQLMaintenanceModel, value, RaisePropertyChanged()); }
@@ -16,7 +16,7 @@ namespace ServerApp.INotify
 
         public SQLMaintenanceNotify() { }
 
-        public SQLMaintenanceNotify(MSQLMaintenance mSQLMaintenance)
+        public SQLMaintenanceNotify(MBLLQuery mSQLMaintenance)
         {
             sQLMaintenanceModel = mSQLMaintenance;
         }

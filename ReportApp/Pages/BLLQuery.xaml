@@ -79,12 +79,9 @@
             </Grid>
         </Grid>
         <Grid Grid.Column="1">
-            <materialDesign:DialogHost>
+            <materialDesign:DialogHost Style="{StaticResource MaterialDesignEmbeddedDialogHost}">
                 <materialDesign:DialogHost.DialogContent>
-                    <Grid
-                        Width="600"
-                        Height="800"
-                        Margin="10">
+                    <Grid Margin="10">
                         <DockPanel>
                             <TextBlock
                                 Margin="10"

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ServerApp.Model
 {
-    public class MSQLMaintenance
+    public class MBLLQuery
     {
         public struct BoxItem
         {
@@ -17,7 +17,7 @@ namespace ServerApp.Model
         public ObservableCollection<BoxItem> SqlActive { get; set; }
         public string Sql { get; set; }
 
-        public MSQLMaintenance(List<BoxItem> sqlGroup, List<BoxItem> sqlActive, string sql)
+        public MBLLQuery(List<BoxItem> sqlGroup, List<BoxItem> sqlActive, string sql)
         {
 
             SqlGroup = new ObservableCollection<BoxItem>(sqlGroup);

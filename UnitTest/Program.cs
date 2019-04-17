@@ -8,10 +8,6 @@ namespace UnitTest
         static void Main(string[] args)
         {
             var _u = new U_User();
-
-
-            var users = _u.CheckUser("hjh","123456");
-
             Console.Read();
         }
     }

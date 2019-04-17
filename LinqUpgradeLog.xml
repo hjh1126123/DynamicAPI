@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='_LinqUpgradeReport_Files/LinqUpgradeReport.xslt'?>
+<LinqUpgradeLog>
+<Properties>
+<Property Name="Solution" Value="D:\HDB_Report_Rebuild\HDBReport\HDBReport.sln"></Property>
+<Property Name="Solution File" Value="D:\HDB_Report_Rebuild\HDBReport"></Property>
+<Property Name="Date" Value="2019/4/17 10:47:45"></Property>
+</Properties>
+<Event ErrorLevel="3" Project="UnitTest" Source="App.config" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="UnitTest" Source="Program.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="UnitTest" Source="Properties" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="UnitTest" Source="AssemblyInfo.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="App.config" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="App.xaml" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="App.xaml.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Command" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="AnotherCommandImplementation.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Controls" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="MessageDialog.xaml" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="MessageDialog.xaml.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Palette.xaml" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Palette.xaml.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="DB" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="ChartReport.db" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Extension" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="NotifyPropertyChangedExtension.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="INotify" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="HomeNotify.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="RouterNotify.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="ServerNotify.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="SQLMaintenanceNotify.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="MainWindow.xaml" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="MainWindow.xaml.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Model" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="MBLLQuery.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="MHome.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="MMainWindow.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="MPaletteSelector.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="MServerControl.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Models" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Generated" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Database.tt" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Database.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="packages.config" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Pages" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="BLLAdd.xaml" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="BLLAdd.xaml.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="BLLQuery.xaml" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="BLLQuery.xaml.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Home.xaml" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Home.xaml.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="PaletteSelector.xaml" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="PaletteSelector.xaml.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="ServeControl.xaml" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="ServeControl.xaml.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Properties" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="AssemblyInfo.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Resources.resx" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Resources.Designer.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Settings.settings" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Settings.Designer.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Resources" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Img" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="logo.png" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Quartz.png" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="Wcf.png" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="ServeTemplate" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="IServeTemplate.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="x64" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="SQLite.Interop.dll" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="x86" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="ReportApp" Source="SQLite.Interop.dll" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Data" Source="DB.lqml" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Data" Source="DB.Designer.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Data" Source="DB.Diagram1.view" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Data" Source="DB.edps" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Data" Source="Local" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Data" Source="U_User.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Data" Source="Net" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Data" Source="DataControl.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Data" Source="DataModel.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Data" Source="IData.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Data" Source="Properties" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Data" Source="AssemblyInfo.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="example" Source="Deprecated" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="example" Source="4_APP" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Util" Source="Properties" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Util" Source="AssemblyInfo.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Util" Source="URandom.cs" Description="No need to convert"></Event>
+
+</LinqUpgradeLog>

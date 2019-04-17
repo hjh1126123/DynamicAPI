@@ -73,7 +73,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\MSQLMaintenance.cs" />
+    <Compile Include="Model\MBLLQuery.cs" />
     <Compile Include="Pages\BLLAdd.xaml.cs">
       <DependentUpon>BLLAdd.xaml</DependentUpon>
     </Compile>
@@ -195,12 +195,6 @@
     <Content Include="Models\Generated\Database.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Database.cs</LastGenOutput>
-    </Content>
-    <Content Include="x64\SQLite.Interop.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\SQLite.Interop.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
