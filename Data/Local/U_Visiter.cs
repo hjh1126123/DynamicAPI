@@ -1,4 +1,4 @@
-﻿//using DBLocal;
+﻿using EntityLocal;
 using LinqKit;
 using System;
 using System.Collections.Generic;
@@ -16,33 +16,33 @@ namespace Data.Local
         public DateTime? SysTimeEnd { get; set; }
     }
 
-    public class U_Visiter
+    public class U_Visiter : DBComponent
     {
         /// <summary>
         /// 获取某一条数据
         /// </summary>
         /// <param name="visiter">查询条件对象</param>
         /// <returns></returns>
-        //public List<UVisiter> Select(Visiter visiter)
-        //{
-        //    using (var context = new DBContext())
-        //    {
-        //        var pre = PredicateBuilder.New<UVisiter>();
-        //        if (!string.IsNullOrWhiteSpace(visiter.Ip))
-        //        {
-        //            pre.And(v => v.Ip.Equals(visiter.Ip));
-        //        }
-        //        if (visiter.SysTimeStart != null)
-        //        {
-        //            pre.And(v => v.Systime >= visiter.SysTimeStart);
-        //        }
-        //        if (visiter.SysTimeEnd != null)
-        //        {
-        //            pre.And(v => v.Systime <= visiter.SysTimeEnd);
-        //        }
+        public List<UVisiter> Select(Visiter visiter)
+        {
+            return Context(db =>
+            {
+                var pre = PredicateBuilder.New<UVisiter>();
+                if (!string.IsNullOrWhiteSpace(visiter.Ip))
+                {
+                    pre.And(v => v.Ip.Equals(visiter.Ip));
+                }
+                if (visiter.SysTimeStart != null)
+                {
+                    pre.And(v => v.Systime >= visiter.SysTimeStart);
+                }
+                if (visiter.SysTimeEnd != null)
+                {
+                    pre.And(v => v.Systime <= visiter.SysTimeEnd);
+                }
 
-        //        return context.UVisiters.AsExpandable().Where(pre).ToList();
-        //    }
-        //}
+                return db.UVisiters.AsExpandable().Where(pre).ToList();
+            });
+        }
     }
 }

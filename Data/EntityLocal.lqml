@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Database Name="main" EntityNamespace="EntityLocal" ContextNamespace="EntityLocal" Class="DBContext" xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" ed:Guid="386a8068-96a1-461f-b054-b9e858ac02d4" Provider="Devart.Data.SQLite.Linq.Provider.SQLiteDataProvider, Devart.Data.SQLite.Linq" Extended="true" xmlns="http://schemas.devart.com/linqconnect/mapping">
+  <Connection Mode="ConnectionString" ConnectionString="Data Source=D:\HDB_Report_Rebuild\HDBReport\DB\ChartReport.db" Provider="Devart.Data.SQLite" />
+  <Table Name="&quot;main&quot;.U_User" Member="UUsers">
+    <Type Name="UUser" ed:Guid="7966aa70-b446-49ca-80e5-a99024d81a93">
+      <Column Name="id" Member="Id" Type="System.Int64" AutoSync="OnInsert" DbType="INTEGER NOT NULL" IsReadOnly="true" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Always" ed:ValidateRequired="true" ed:Guid="68bb64d5-33ed-4d4d-b5eb-41e340eae35d" />
+      <Column Name="userid" Member="Userid" Type="System.String" DbType="VARCHAR NOT NULL" CanBeNull="false" UpdateCheck="Never" MaxLength="100" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="28b777d3-1fa8-4663-846e-8171134cdc3e" />
+      <Column Name="password" Member="Password" Type="System.String" DbType="VARCHAR NOT NULL" CanBeNull="false" UpdateCheck="Never" MaxLength="100" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="38105a17-bf8b-4d72-8abe-a8497c9d6976" />
+      <Column Name="name" Member="Name" Type="System.String" DbType="VARCHAR" CanBeNull="true" UpdateCheck="Never" DefaultValue="&quot;未取名&quot;" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="7343611e-f568-48c8-8412-d9e90a9d4d98" />
+      <Column Name="email" Member="Email" Type="System.String" DbType="VARCHAR" CanBeNull="true" UpdateCheck="Never" MaxLength="100" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="f1d5452f-4ddd-4c85-ab87-af63e78bb174" />
+      <Column Name="power" Member="Power" Type="System.Int64" DbType="INTEGER NOT NULL" CanBeNull="false" UpdateCheck="Never" DefaultValue="0" ed:ValidateRequired="true" ed:Guid="8d5b3c79-d6fe-4b8a-ad35-c087b4ff9034" />
+      <Column Name="systime" Member="Systime" Type="System.DateTime" DbType="DATETIME NOT NULL" CanBeNull="false" UpdateCheck="Never" DefaultValue="datetime('now', 'localtime')" ed:ValidateRequired="true" ed:Guid="10ddb0e8-270d-4afb-8362-d1a30a7eed8a" />
+      <Column Name="createtime" Member="Createtime" Type="System.DateTime" DbType="DATETIME NOT NULL" CanBeNull="false" UpdateCheck="Never" DefaultValue="datetime('now', 'localtime')" ed:ValidateRequired="true" ed:Guid="c48f7188-1ffa-4e3f-8b8f-9b11084616a0" />
+    </Type>
+  </Table>
+  <Table Name="&quot;main&quot;.U_Visiter" Member="UVisiters">
+    <Type Name="UVisiter" ed:Guid="c08d1062-44e2-4770-8129-e81c6346655b">
+      <Column Name="id" Member="Id" Type="System.Int64" AutoSync="OnInsert" DbType="INTEGER NOT NULL" IsReadOnly="true" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Always" ed:ValidateRequired="true" ed:Guid="af2f2a10-18a9-4169-b1cc-2722074bd9e4" />
+      <Column Name="ip" Member="Ip" Type="System.String" DbType="VARCHAR NOT NULL" CanBeNull="false" UpdateCheck="Never" MaxLength="100" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="95286233-2407-49a9-89a2-b587474a1b6a" />
+      <Column Name="country" Member="Country" Type="System.String" DbType="VARCHAR NOT NULL" CanBeNull="false" UpdateCheck="Never" DefaultValue="&quot;未知&quot;" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="152bf81c-4784-4646-8a2c-9b028522c01e" />
+      <Column Name="province" Member="Province" Type="System.String" DbType="VARCHAR NOT NULL" CanBeNull="false" UpdateCheck="Never" DefaultValue="&quot;未知&quot;" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="7f180c18-3d72-46d9-b56c-029e017ec33b" />
+      <Column Name="city" Member="City" Type="System.String" DbType="VARCHAR NOT NULL" CanBeNull="false" UpdateCheck="Never" DefaultValue="&quot;未知&quot;" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="19000b9c-5d6b-4a42-b838-89aaff372529" />
+      <Column Name="mno" Member="Mno" Type="System.String" DbType="VARCHAR NOT NULL" CanBeNull="false" UpdateCheck="Never" DefaultValue="&quot;未知&quot;" MaxLength="20" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="60f6a194-6db7-4f95-8c11-1ebfd7323974" />
+      <Column Name="systime" Member="Systime" Type="System.DateTime" DbType="DATETIME NOT NULL" CanBeNull="false" UpdateCheck="Never" DefaultValue="datetime('now', 'localtime')" ed:ValidateRequired="true" ed:Guid="e70d6263-60b9-4c0a-81c8-99e33b19ec7d" />
+      <Column Name="createtime" Member="Createtime" Type="System.DateTime" DbType="DATETIME NOT NULL" CanBeNull="false" UpdateCheck="Never" DefaultValue="datetime('now', 'localtime')" ed:ValidateRequired="true" ed:Guid="94354a10-06e4-4ca8-8fdd-903a0c2098c4" />
+    </Type>
+  </Table>
+  <Table Name="&quot;main&quot;.B_Params" Member="BParams">
+    <Type Name="BParam" ed:Guid="9350ea40-b089-4d32-b400-37c1a0a089bf">
+      <Column Name="id" Member="Id" Type="System.Int64" AutoSync="OnInsert" DbType="INTEGER NOT NULL" IsReadOnly="true" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Always" ed:ValidateRequired="true" ed:Guid="a33a6316-0b7c-4a7c-b11d-b3ba0b1919a5" />
+      <Column Name="pid" Member="Pid" Type="System.Int64" DbType="BIGINT NOT NULL" CanBeNull="false" UpdateCheck="Never" ed:ValidateRequired="true" ed:Guid="23216d70-65b3-42ba-a24c-890090dffca6" />
+      <Column Name="name" Member="Name" Type="System.String" DbType="VARCHAR NOT NULL" CanBeNull="false" UpdateCheck="Never" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="8c27236d-8c78-449f-9246-1bad0ea24667" />
+      <Column Name="&quot;key&quot;" Member="Key" Type="System.String" DbType="VARCHAR NOT NULL" CanBeNull="false" UpdateCheck="Never" MaxLength="30" ed:ValidateMaxLength="30" ed:ValidateRequired="true" ed:Guid="41876834-0077-4188-b8de-41e801f4a08a" />
+      <Column Name="describe" Member="Describe" Type="System.String" DbType="VARCHAR" CanBeNull="true" UpdateCheck="Never" MaxLength="200" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="401c385b-c3b6-4e4a-a148-fc6c8646fbca" />
+      <Column Name="systime" Member="Systime" Type="System.DateTime" DbType="DATETIME NOT NULL" CanBeNull="false" UpdateCheck="Never" DefaultValue="datetime('now', 'localtime')" ed:ValidateRequired="true" ed:Guid="12401e46-f4ae-4151-b5d9-6fce72b5473a" />
+      <Column Name="createtime" Member="Createtime" Type="System.DateTime" DbType="DATETIME NOT NULL" CanBeNull="false" UpdateCheck="Never" DefaultValue="datetime('now', 'localtime')" ed:ValidateRequired="true" ed:Guid="88be4653-6c25-495b-888d-c5a63bfaec54" />
+    </Type>
+  </Table>
+  <Table Name="&quot;main&quot;.D_MsSQL" Member="DMsSQLs">
+    <Type Name="DMsSQL" ed:Guid="9a520304-c5bc-4c13-8650-0edd1d4ea066">
+      <Column Name="id" Member="Id" Type="System.Int64" AutoSync="OnInsert" DbType="INTEGER NOT NULL" IsReadOnly="true" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Always" ed:ValidateRequired="true" ed:Guid="4e20e8f3-4891-4db9-9c50-94829a511835" />
+      <Column Name="&quot;group&quot;" Member="Group" Type="System.String" DbType="VARCHAR NOT NULL" CanBeNull="false" UpdateCheck="Never" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="f0cd70ce-5e89-49f2-9705-97e7ff886393" />
+      <Column Name="active" Member="Active" Type="System.String" DbType="VARCHAR NOT NULL" CanBeNull="false" UpdateCheck="Never" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="fd5bdad5-7805-486d-83a5-4a4a02ab26c9" />
+      <Column Name="sql" Member="Sql" Type="System.String" DbType="VARCHAR NOT NULL" CanBeNull="false" UpdateCheck="Never" MaxLength="500" ed:ValidateMaxLength="500" ed:ValidateRequired="true" ed:Guid="2be4b619-ea52-4b31-9ab8-dd89068413f8" />
+      <Column Name="pid" Member="Pid" Type="System.String" DbType="VARCHAR" CanBeNull="true" UpdateCheck="Never" MaxLength="100" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="346f192d-9284-46a0-8b26-07bdfe4b7fc2" />
+      <Column Name="operator" Member="Operator" Type="System.String" DbType="VARCHAR NOT NULL" CanBeNull="false" UpdateCheck="Never" MaxLength="30" ed:ValidateMaxLength="30" ed:ValidateRequired="true" ed:Guid="dfca751f-1e8b-4f06-88b9-e9d52566c99d" />
+      <Column Name="createtime" Member="Createtime" Type="System.DateTime" DbType="DATETIME NOT NULL" CanBeNull="false" UpdateCheck="Never" DefaultValue="datetime('now', 'localtime')" ed:ValidateRequired="true" ed:Guid="aabbfc16-c085-4375-ae37-0a22b466816d" />
+      <Column Name="systime" Member="Systime" Type="System.DateTime" DbType="DATETIME NOT NULL" CanBeNull="false" UpdateCheck="Never" DefaultValue="datetime('now', 'localtime')" ed:ValidateRequired="true" ed:Guid="6b4706e0-ba16-452c-8eec-51004e6f2468" />
+    </Type>
+  </Table>
+  <Table Name="&quot;main&quot;.U_Power" Member="UPowers">
+    <Type Name="UPower" ed:Guid="014a9e23-ab41-4938-b4d1-ab3e0c550da4">
+      <Column Name="id" Member="Id" Type="System.Int64" AutoSync="OnInsert" DbType="INTEGER NOT NULL" IsReadOnly="true" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Always" ed:ValidateRequired="true" ed:Guid="a2727cb2-2e2a-4ffe-892a-a58b3b203a5a" />
+      <Column Name="powerid" Member="Powerid" Type="System.Int64" DbType="INTEGER NOT NULL" CanBeNull="false" UpdateCheck="Never" ed:ValidateRequired="true" ed:Guid="ba3f2295-3577-4273-9a70-5897afc4d18f" />
+      <Column Name="ableuser" Member="Ableuser" Type="System.String" DbType="VARCHAR NOT NULL" CanBeNull="false" UpdateCheck="Never" MaxLength="300" ed:ValidateMaxLength="300" ed:ValidateRequired="true" ed:Guid="bea92315-4a84-4e01-b6d4-59645f2ba56e" />
+      <Column Name="createtime" Member="Createtime" Type="System.DateTime" DbType="DATETIME NOT NULL" CanBeNull="false" UpdateCheck="Never" DefaultValue="datetime('now', 'localtime')" ed:ValidateRequired="true" ed:Guid="01c8747c-684d-4690-93f8-adf6503da9eb" />
+      <Column Name="systime" Member="Systime" Type="System.DateTime" DbType="DATETIME NOT NULL" CanBeNull="false" UpdateCheck="Never" DefaultValue="datetime('now', 'localtime')" ed:ValidateRequired="true" ed:Guid="8febdb12-c319-4d8e-9b0f-527d3f558d42" />
+    </Type>
+  </Table>
+</Database>

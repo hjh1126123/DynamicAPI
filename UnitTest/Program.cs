@@ -1,4 +1,5 @@
-﻿using Data.Local;
+﻿using Data;
+using Data.Local;
 using System;
 
 namespace UnitTest
@@ -7,8 +8,7 @@ namespace UnitTest
     {
         static void Main(string[] args)
         {
-            var _u = new U_User();
-            Console.Read();
+            
         }
     }
 }
