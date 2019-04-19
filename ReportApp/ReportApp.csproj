@@ -67,12 +67,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="INotify\SQLMaintenanceNotify.cs" />
-    <Compile Include="Models\Generated\Database.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
+    <Compile Include="INotify\BLLAddNotify.cs" />
+    <Compile Include="INotify\BLLQueryNotify.cs" />
+    <Compile Include="Model\MBLLAdd.cs" />
     <Compile Include="Model\MBLLQuery.cs" />
     <Compile Include="Pages\BLLAdd.xaml.cs">
       <DependentUpon>BLLAdd.xaml</DependentUpon>
@@ -189,13 +186,6 @@
       <Project>{e4f80a34-ee53-4280-a3f5-b908fdb28c05}</Project>
       <Name>Data</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DB\ChartReport.db" />
-    <Content Include="Models\Generated\Database.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Database.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

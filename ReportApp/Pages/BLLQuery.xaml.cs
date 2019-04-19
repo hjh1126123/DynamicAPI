@@ -11,18 +11,18 @@ namespace ServerApp.Pages
     /// </summary>
     public partial class BLLQuery : UserControl
     {
-        SQLMaintenanceNotify SQLMaintenanceNotify;
+        BLLQueryNotify bLLQueryNotify;
 
         public BLLQuery()
         {
             InitializeComponent();
 
-            if (SQLMaintenanceNotify == null)
+            if (bLLQueryNotify == null)
             {
-                SQLMaintenanceNotify = new SQLMaintenanceNotify();
+                bLLQueryNotify = new BLLQueryNotify();
             }
 
-            DataContext = SQLMaintenanceNotify;
+            DataContext = bLLQueryNotify;
         }
 
         private void SQLMaintenanceLoaded(object sender, System.Windows.RoutedEventArgs e)
@@ -114,8 +114,7 @@ namespace ServerApp.Pages
                         Text = "业务5"
                     }
                 };
-
-            SQLMaintenanceNotify.SQLMaintenanceModel = new Model.MBLLQuery(sqlType, sqlActive, "select * from all");
+            bLLQueryNotify.SQLMaintenanceModel = new Model.MBLLQuery(sqlType, sqlActive, "select * from all");
         }
     }
 }

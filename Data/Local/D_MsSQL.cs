@@ -1,5 +1,5 @@
 ﻿using EntityLocal;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 
 namespace Data.Local
@@ -60,7 +60,9 @@ namespace Data.Local
                     Active = msSQL.Active,
                     Sql = msSQL.Sql,
                     Pid = msSQL.Pid,
-                    Operator = msSQL.Operator
+                    Operator = msSQL.Operator,
+                    Systime = DateTime.Now,
+                    Createtime = DateTime.Now
                 });
                 db.SubmitChanges();
 
@@ -82,12 +84,23 @@ namespace Data.Local
             {
                 var tmp = db.DMsSQLs.Where(i => i.Id == msSQL.Id).FirstOrDefault();
 
-                db.DMsSQLs.Attach(tmp);
+                if (!string.IsNullOrWhiteSpace(msSQL.Group))
+                    tmp.Group = msSQL.Group;
+
+                if (!string.IsNullOrWhiteSpace(msSQL.Active))
+                    tmp.Active = msSQL.Active;
 
                 if (!string.IsNullOrWhiteSpace(msSQL.Sql))
-                {
                     tmp.Sql = msSQL.Sql;
-                }
+
+                if (!string.IsNullOrWhiteSpace(msSQL.Operator))
+                    tmp.Operator = msSQL.Operator;
+
+                if (!string.IsNullOrWhiteSpace(msSQL.Pid))
+                    tmp.Pid = msSQL.Pid;
+
+                tmp.Systime = DateTime.Now;
+
                 db.SubmitChanges();
 
                 complete = true;
@@ -106,6 +119,9 @@ namespace Data.Local
             return Context(db =>
             {
                 var tmp = db.DMsSQLs.Where(i => i.Id == id).FirstOrDefault();
+                if (tmp == null)
+                    return complete;
+
                 db.DMsSQLs.DeleteOnSubmit(tmp);
 
                 db.SubmitChanges();

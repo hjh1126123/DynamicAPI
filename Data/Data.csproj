@@ -86,6 +86,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityLocal.lqml</DependentUpon>
     </Compile>
+    <Compile Include="Local\B_Active.cs" />
+    <Compile Include="Local\B_Group.cs" />
+    <Compile Include="Local\B_Params.cs" />
     <Compile Include="Local\D_MsSQL.cs" />
     <Compile Include="Local\U_User.cs" />
     <Compile Include="Local\U_Visiter.cs" />

@@ -18,7 +18,7 @@
       <Diagram Name="Diagram1" DefaultDiagram="True" />
     </Diagrams>
     <Templates>
-      <Template Name="Local实体数据模型" Description="根据Local表自动生成的实体数据模型" Enabled="True" PredefinedTemplateName="LinqConnect C#">
+      <Template Name="LinqConnect" Description="Use this template to generate a strongly-typed DataContext class and persistence-aware classes." Enabled="True" PredefinedTemplateName="LinqConnect C#">
         <ed:Property Name="ValidationFramework" Type="EntityDeveloper.TemplateEngine.ValidationFramework, EntityDeveloper.Common, Version=6.4.719.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <ValidationFramework>None</ValidationFramework>
         </ed:Property>

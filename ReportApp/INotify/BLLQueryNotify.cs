@@ -5,20 +5,20 @@ using System.ComponentModel;
 
 namespace ServerApp.INotify
 {
-    public class SQLMaintenanceNotify : INotifyPropertyChanged
+    public class BLLQueryNotify : INotifyPropertyChanged
     {
-        private MBLLQuery sQLMaintenanceModel;
+        private MBLLQuery bllQuery;
         public MBLLQuery SQLMaintenanceModel
         {
-            get { return sQLMaintenanceModel; }
-            set { this.MutateVerbose(ref sQLMaintenanceModel, value, RaisePropertyChanged()); }
+            get { return bllQuery; }
+            set { this.MutateVerbose(ref bllQuery, value, RaisePropertyChanged()); }
         }
 
-        public SQLMaintenanceNotify() { }
+        public BLLQueryNotify() { }
 
-        public SQLMaintenanceNotify(MBLLQuery mSQLMaintenance)
+        public BLLQueryNotify(MBLLQuery mbllQuery)
         {
-            sQLMaintenanceModel = mSQLMaintenance;
+            bllQuery = mbllQuery;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
