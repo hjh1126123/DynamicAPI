@@ -11,11 +11,11 @@ namespace ServerApp.Pages
     /// <summary>
     /// Setting.xaml 的交互逻辑
     /// </summary>
-    public partial class BLLAdd : UserControl
+    public partial class BLLGroup : UserControl
     {
         BLLAddNotify addNotify;
 
-        public BLLAdd()
+        public BLLGroup()
         {
             InitializeComponent();
 

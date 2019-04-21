@@ -19,6 +19,7 @@ namespace ServerApp.Model
                 new RouterNotify("服务", new Server()),
                 new RouterNotify("业务添加", new BLLAdd()),
                 new RouterNotify("业务查看", new BLLQuery()),
+                new RouterNotify("业务组管理", new BLLGroup()),
                 new RouterNotify("主题修改",new PaletteSelector())
             };
         }

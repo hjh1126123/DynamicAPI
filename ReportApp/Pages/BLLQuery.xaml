@@ -95,7 +95,7 @@
                                 DockPanel.Dock="Bottom"
                                 Orientation="Horizontal">
                                 <Button
-                                    Command="materialDesign:DialogHost.CloseDialogCommand"
+                                    Command="{Binding materialDesignDialogHost.CloseDialogCommand}"
                                     IsDefault="True"
                                     Style="{StaticResource MaterialDesignFlatButton}">
                                     <Button.CommandParameter>
