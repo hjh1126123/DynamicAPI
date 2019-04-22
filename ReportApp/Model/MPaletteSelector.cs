@@ -1,10 +1,10 @@
 ﻿using MaterialDesignColors;
 using MaterialDesignThemes.Wpf;
-using ServerApp.Command;
+using ReportApp.Command;
 using System.Collections.Generic;
 using System.Windows.Input;
 
-namespace ServerApp.Model
+namespace ReportApp.Model
 {
     public class MPaletteSelector
     {

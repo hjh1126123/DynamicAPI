@@ -1,7 +1,7 @@
-﻿using ServerApp.Model;
+﻿using ReportApp.Model;
 using System.Windows.Controls;
 
-namespace ServerApp.Pages
+namespace ReportApp.Pages
 {
     /// <summary>
     /// PaletteSelector.xaml 的交互逻辑

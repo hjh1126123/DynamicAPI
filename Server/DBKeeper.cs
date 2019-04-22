@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 
-namespace Data
+namespace Server
 {
     public class DBKeeper
     {
@@ -25,7 +25,6 @@ namespace Data
         /// 数据组件存储对象
         /// </summary>
         private readonly ConcurrentDictionary<string, DBComponent> componentsSave;
-
         /// <summary>
         /// 获取数据组件
         /// </summary>
@@ -41,9 +40,9 @@ namespace Data
             }
             else
             {
-                T t = new T();
-                componentsSave.AddOrUpdate(ObjName, t, (k, v) => t);
-                return t;
+                T components = new T();
+                componentsSave.AddOrUpdate(ObjName, components, (k, v) => components);
+                return components;
             }
         }
 

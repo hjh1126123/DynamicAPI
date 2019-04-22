@@ -1,8 +1,11 @@
-﻿<Application x:Class="ReportApp.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ReportApp"
-             StartupUri="MainWindow.xaml">
+﻿<Application
+    x:Class="ReportApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:local="clr-namespace:ReportApp"
+    StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -11,6 +14,19 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <!--  自定义listbox样式  -->
+            <ItemsPanelTemplate x:Key="M_ListBoxTemplate">
+                <VirtualizingStackPanel IsItemsHost="True">
+                    <i:Interaction.Behaviors>
+                        <ei:FluidMoveBehavior AppliesTo="Children" Duration="0:0:1">
+                            <ei:FluidMoveBehavior.EaseY>
+                                <CircleEase EasingMode="EaseOut" />
+                            </ei:FluidMoveBehavior.EaseY>
+                        </ei:FluidMoveBehavior>
+                    </i:Interaction.Behaviors>
+                </VirtualizingStackPanel>
+            </ItemsPanelTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

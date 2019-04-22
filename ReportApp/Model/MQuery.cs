@@ -1,11 +1,11 @@
-﻿using ServerApp.Command;
-using System.Windows.Input;
-using System.Collections.ObjectModel;
+﻿using ReportApp.Command;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
-namespace ServerApp.Model
+namespace ReportApp.Model
 {
-    public class MBLLQuery
+    public class MQuery
     {
         public struct BoxItem
         {
@@ -17,7 +17,7 @@ namespace ServerApp.Model
         public ObservableCollection<BoxItem> SqlActive { get; set; }
         public string Sql { get; set; }
 
-        public MBLLQuery(List<BoxItem> sqlGroup, List<BoxItem> sqlActive, string sql)
+        public MQuery(List<BoxItem> sqlGroup, List<BoxItem> sqlActive, string sql)
         {
 
             SqlGroup = new ObservableCollection<BoxItem>(sqlGroup);

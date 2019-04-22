@@ -1,9 +1,9 @@
-﻿using ServerApp.INotify;
-using ServerApp.Model;
+﻿using ReportApp.INotify;
+using ReportApp.Model;
 using System.Collections.Generic;
 using System.Windows.Controls;
 
-namespace ServerApp.Pages
+namespace ReportApp.Pages
 {
     /// <summary>
     /// Home.xaml 的交互逻辑

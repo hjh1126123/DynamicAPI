@@ -1,42 +1,91 @@
-﻿using ServerApp.INotify;
-using ServerApp.Model;
-using System.Collections.Generic;
+﻿using EntityLocal;
+using ReportApp.INotify;
+using Server;
+using Server.Local;
 using System.Windows.Controls;
-using System;
-using Data;
-using Data.Local;
 
-namespace ServerApp.Pages
+namespace ReportApp.Pages
 {
     /// <summary>
     /// Setting.xaml 的交互逻辑
     /// </summary>
     public partial class BLLGroup : UserControl
     {
-        BLLAddNotify addNotify;
-
+        readonly GroupNotify notifyGroup;
+        BGroup checkedBox;
         public BLLGroup()
         {
             InitializeComponent();
 
-            if (addNotify == null)
+            if (notifyGroup == null)
             {
-                addNotify = new BLLAddNotify();
+                notifyGroup = new GroupNotify();
             }
 
-            DataContext = addNotify;
+            DataContext = notifyGroup;
         }
 
-        private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private void BLLGroupLoaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            //addNotify.BllAdd = new MBLLAdd(DBKeeper.Instance.DBObject<B_Group>().SelectAll());
+            notifyGroup.Groups = DBKeeper.Instance.DBObject<B_Group>().SelectAll();
         }
 
-        private void SQL_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void GroupList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(e.Key == System.Windows.Input.Key.Enter)
+            var lbx = (ListBox)sender;
+            if (lbx.SelectedItem != null)
             {
+                checkedBox = (BGroup)lbx.SelectedItem;
+                notifyGroup.Name = checkedBox.Gname;
+                notifyGroup.Describe = checkedBox.Gdescribe;
+            }
+        }
 
+        private void Sumbit_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            bool isComplete;
+            if (checkedBox == null)
+            {
+                isComplete = DBKeeper.Instance.DBObject<B_Group>().Add(new global::Server.Local.Group
+                {
+                    Name = notifyGroup.Name,
+                    Describe = notifyGroup.Describe
+                });
+            }
+            else
+            {
+                isComplete = DBKeeper.Instance.DBObject<B_Group>().Update(new global::Server.Local.Group
+                {
+                    Id = checkedBox.Id,
+                    Name = notifyGroup.Name,
+                    Describe = notifyGroup.Describe
+                });
+            }
+            if (isComplete)
+            {
+                notifyGroup.Groups = DBKeeper.Instance.DBObject<B_Group>().SelectAll();
+                if (checkedBox != null)
+                {
+                    GroupList.SelectedItem = checkedBox;
+                }
+            }
+        }
+
+        private void Add_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            checkedBox = null;
+            notifyGroup.Name = "";
+            notifyGroup.Describe = "";
+        }
+
+        private void Delete_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (checkedBox == null)
+                return;
+
+            if (DBKeeper.Instance.DBObject<B_Group>().Delete(new global::Server.Local.Group { Id = checkedBox.Id }))
+            {
+                notifyGroup.Groups = DBKeeper.Instance.DBObject<B_Group>().SelectAll();
             }
         }
     }

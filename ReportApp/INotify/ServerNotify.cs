@@ -1,10 +1,10 @@
-﻿using ServerApp.Extension;
-using ServerApp.Model;
+﻿using ReportApp.Extension;
+using ReportApp.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace ServerApp.INotify
+namespace ReportApp.INotify
 {
     public class ServerNotify : INotifyPropertyChanged
     {

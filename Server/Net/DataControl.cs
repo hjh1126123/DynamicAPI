@@ -5,9 +5,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Threading;
 using System.Threading.Tasks;
-using Util;
+using Tool;
 
-namespace Data
+namespace Server
 {
     /// <summary>
     /// 数据控制器
@@ -103,7 +103,7 @@ namespace Data
                 {
                     while (true)
                     {
-                        sQL.key = URandom.Instance.GetRandomString(12);
+                        sQL.key = TRandom.Instance.GetRandomString(12);
                         if (isUse.ContainsKey(sQL.key))
                         {
                             continue;

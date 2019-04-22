@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Data.Local
+namespace Server.Local
 {
     /// <summary>
     /// 查询条件对象

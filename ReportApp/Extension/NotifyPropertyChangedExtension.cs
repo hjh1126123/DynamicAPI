@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ServerApp.Extension
+namespace ReportApp.Extension
 {
     public static class NotifyPropertyChangedExtension
     {

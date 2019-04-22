@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Util
+namespace Tool
 {
-    public class URandom
+    public class TRandom
     {
-        private static readonly Lazy<URandom> lazyInstance = new Lazy<URandom>(() => new URandom());
-        public static URandom Instance
+        private static readonly Lazy<TRandom> lazyInstance = new Lazy<TRandom>(() => new TRandom());
+        public static TRandom Instance
         {
             get
             {
@@ -15,7 +15,7 @@ namespace Util
         }
 
         private readonly Random random;
-        public URandom()
+        public TRandom()
         {
             byte[] b = new byte[8];
             new RNGCryptoServiceProvider().GetBytes(b);

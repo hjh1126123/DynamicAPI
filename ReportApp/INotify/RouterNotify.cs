@@ -1,10 +1,10 @@
-﻿using ServerApp.Extension;
+﻿using ReportApp.Extension;
 using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ServerApp.INotify
+namespace ReportApp.INotify
 {
     public class RouterNotify : INotifyPropertyChanged
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace ServerApp.Command
+namespace ReportApp.Command
 {
     public class AnotherCommandImplementation : ICommand
     {

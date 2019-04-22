@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace Data
+namespace Server
 {
     public abstract class IData
     {

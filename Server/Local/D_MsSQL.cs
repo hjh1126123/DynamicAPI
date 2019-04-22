@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace Data.Local
+namespace Server.Local
 {
     public class MsSQL
     {
@@ -11,14 +11,12 @@ namespace Data.Local
         private string active;
         private string sql;
         private string pid;
-        private string @operator;
 
         public int Id { get => id; set => id = value; }
         public string Group { get => group; set => group = value; }
         public string Active { get => active; set => active = value; }
         public string Sql { get => sql; set => sql = value; }
         public string Pid { get => pid; set => pid = value; }
-        public string Operator { get => @operator; set => @operator = value; }
 
     }
 
@@ -51,7 +49,6 @@ namespace Data.Local
         /// <returns></returns>
         public bool Add(MsSQL msSQL)
         {
-            bool complete = false;
             return Context(db =>
             {
                 db.DMsSQLs.InsertOnSubmit(new DMsSQL
@@ -60,15 +57,12 @@ namespace Data.Local
                     Active = msSQL.Active,
                     Sql = msSQL.Sql,
                     Pid = msSQL.Pid,
-                    Operator = msSQL.Operator,
+                    Operator = "hjh",
                     Systime = DateTime.Now,
                     Createtime = DateTime.Now
                 });
                 db.SubmitChanges();
-
-                complete = true;
-
-                return complete;
+                return true;
             });
         }
 
@@ -79,7 +73,6 @@ namespace Data.Local
         /// <returns></returns>
         public bool Update(MsSQL msSQL)
         {
-            bool complete = false;
             return Context(db =>
             {
                 var tmp = db.DMsSQLs.Where(i => i.Id == msSQL.Id).FirstOrDefault();
@@ -93,9 +86,6 @@ namespace Data.Local
                 if (!string.IsNullOrWhiteSpace(msSQL.Sql))
                     tmp.Sql = msSQL.Sql;
 
-                if (!string.IsNullOrWhiteSpace(msSQL.Operator))
-                    tmp.Operator = msSQL.Operator;
-
                 if (!string.IsNullOrWhiteSpace(msSQL.Pid))
                     tmp.Pid = msSQL.Pid;
 
@@ -103,8 +93,7 @@ namespace Data.Local
 
                 db.SubmitChanges();
 
-                complete = true;
-                return complete;
+                return true;
             });
         }
 
@@ -115,19 +104,17 @@ namespace Data.Local
         /// <returns></returns>
         public bool Delete(int id)
         {
-            bool complete = false;
             return Context(db =>
             {
                 var tmp = db.DMsSQLs.Where(i => i.Id == id).FirstOrDefault();
                 if (tmp == null)
-                    return complete;
+                    return false;
 
                 db.DMsSQLs.DeleteOnSubmit(tmp);
 
                 db.SubmitChanges();
 
-                complete = true;
-                return complete;
+                return true;
             });
         }
     }

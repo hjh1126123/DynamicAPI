@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EntityLocal;
 
-namespace Data.Local
+namespace Server.Local
 {
     public class Params
     {
@@ -21,6 +22,16 @@ namespace Data.Local
 
     public class B_Params : DBComponent
     {
-
+        /// <summary>
+        /// 获取所有数据
+        /// </summary>
+        /// <returns></returns>
+        public List<BParam> SelectAll()
+        {
+            return Context(db =>
+            {
+                return db.BParams.ToList();
+            });
+        }
     }
 }

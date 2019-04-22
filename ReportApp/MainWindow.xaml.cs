@@ -1,6 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
-using ServerApp.Controls;
-using ServerApp.Model;
+using ReportApp.Controls;
+using ReportApp.Model;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -8,7 +8,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace ServerApp
+namespace ReportApp
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑

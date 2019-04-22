@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerApp.ServeTemplate
+namespace ReportApp.ServeTemplate
 {
     public abstract class IServeTemplate
     {

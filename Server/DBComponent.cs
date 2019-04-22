@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Data
+namespace Server
 {
     public abstract class DBComponent
     {
@@ -14,21 +14,23 @@ namespace Data
         /// <returns></returns>
         protected T Context<T>(Func<DBContext, T> func)
         {
+            T tmp = default;
             DBContext dBContext = null;
             try
             {
                 dBContext = new DBContext();
-                return func(dBContext);
+                tmp = func(dBContext);
             }
             catch (Exception ex)
             {
-                throw ex;
+                //将 ex 写入日志
             }
             finally
             {
                 if (dBContext == null)
-                    dBContext.Dispose();
+                    dBContext.Dispose();                
             }
+            return tmp;
         }
     }
 }

@@ -2,17 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Util;
+using Tool;
 
-namespace Data.Local
+namespace Server.Local
 {
     public class Active
     {
+        private string gid;
         private string name;
         private string describe;
 
+        public string Gid { get => gid; set => gid = value; }
         public string Name { get => name; set => name = value; }
         public string Describe { get => describe; set => describe = value; }
+        
     }
 
     public class B_Active : DBComponent
@@ -34,29 +37,31 @@ namespace Data.Local
         /// </summary>
         /// <param name="group"></param>
         /// <returns></returns>
-        public bool Add(Active active)
+        public BActive Add(Active active)
         {
-            bool isComplete = false;
-
             if (string.IsNullOrWhiteSpace(active.Name) || string.IsNullOrWhiteSpace(active.Describe))
-                return isComplete;
+            {                
+                return null;
+            }
 
             return Context(db =>
             {
-                db.BActives.InsertOnSubmit(new BActive
+                var bActive = new BActive
                 {
-                    Aid = URandom.Instance.GetRandomString(10),
+                    Aid = TRandom.Instance.GetRandomString(10),
+                    Gid = active.Gid,
                     Aname = active.Name,
                     Adescribe = active.Describe,
                     Operator = "hjh",
                     Createtime = DateTime.Now,
                     Systime = DateTime.Now
-                });
+                };
+
+                db.BActives.InsertOnSubmit(bActive);
 
                 db.SubmitChanges();
 
-                isComplete = true;
-                return isComplete;
+                return bActive;
             });
         }
     }

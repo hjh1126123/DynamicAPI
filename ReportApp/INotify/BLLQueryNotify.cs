@@ -1,14 +1,14 @@
-﻿using ServerApp.Extension;
-using ServerApp.Model;
+﻿using ReportApp.Extension;
+using ReportApp.Model;
 using System;
 using System.ComponentModel;
 
-namespace ServerApp.INotify
+namespace ReportApp.INotify
 {
     public class BLLQueryNotify : INotifyPropertyChanged
     {
-        private MBLLQuery bllQuery;
-        public MBLLQuery SQLMaintenanceModel
+        private MQuery bllQuery;
+        public MQuery BllQuery
         {
             get { return bllQuery; }
             set { this.MutateVerbose(ref bllQuery, value, RaisePropertyChanged()); }
@@ -16,7 +16,7 @@ namespace ServerApp.INotify
 
         public BLLQueryNotify() { }
 
-        public BLLQueryNotify(MBLLQuery mbllQuery)
+        public BLLQueryNotify(MQuery mbllQuery)
         {
             bllQuery = mbllQuery;
         }

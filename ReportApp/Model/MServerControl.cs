@@ -1,12 +1,12 @@
-﻿using ServerApp.Command;
-using ServerApp.ServeTemplate;
+﻿using ReportApp.Command;
+using ReportApp.ServeTemplate;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace ServerApp.Model
+namespace ReportApp.Model
 {
     public class MServerControl
     {
