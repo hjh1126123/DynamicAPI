@@ -16,7 +16,7 @@ namespace ReportApp.INotify
     {
         public List<BGroup> Groups { get; set; }
         public BindingList<CheckBoxParams> Params { get; set; }
-        public List<IApi> Apis { get; set; }        
+        public List<IApi> Apis { get; set; } 
         public string ActiveName { get; set; }
         public string ActiveDescribe { get; set; }
         public string Sql { get; set; }

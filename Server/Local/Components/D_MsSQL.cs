@@ -8,22 +8,18 @@ namespace Server.Local
     public class MsSQL
     {
         private int id;
-        private string sid;
         private string aid;
         private string apiKey;
         private string sql;
-        private string paramskey;        
-        private string timeKey;
-        private string totalKey;
+        private string paramskey;
+        private string strategy;
 
         public int Id { get => id; set => id = value; }
-        public string Sid { get => sid; set => sid = value; }
         public string ApiKey { get => apiKey; set => apiKey = value; }
         public string Aid { get => aid; set => aid = value; }
         public string Sql { get => sql; set => sql = value; }
-        public string Paramskey { get => paramskey; set => paramskey = value; }               
-        public string TimeKey { get => timeKey; set => timeKey = value; }
-        public string TotalKey { get => totalKey; set => totalKey = value; }        
+        public string Paramskey { get => paramskey; set => paramskey = value; }
+        public string Strategy { get => strategy; set => strategy = value; }
     }
 
     public class D_MsSQL : DBComponent
@@ -37,10 +33,10 @@ namespace Server.Local
         {
             return Context(db =>
             {
-                if (string.IsNullOrWhiteSpace(msSQL.Sid))
+                if (string.IsNullOrWhiteSpace(msSQL.Aid))
                     return new DMsSQL();
 
-                return db.DMsSQLs.Where(i => i.Sid.Equals(msSQL.Sid)).FirstOrDefault();                
+                return db.DMsSQLs.Where(i => i.Aid.Equals(msSQL.Aid)).FirstOrDefault();
             });
         }
 
@@ -57,11 +53,10 @@ namespace Server.Local
                 {
                     Sid = TRandom.Instance.GetRandomString(10),
                     Aid = msSQL.Aid,
-                    Apikey = msSQL.ApiKey,                    
+                    Apikey = msSQL.ApiKey,
                     Sql = msSQL.Sql,
-                    Paramskey = msSQL.Paramskey,                    
-                    Timekey = msSQL.TimeKey,
-                    Totalkey = msSQL.TotalKey,       
+                    Paramskey = msSQL.Paramskey,
+                    Strategy = msSQL.Strategy,
                     Operator = "hjh",
                     Systime = DateTime.Now,
                     Createtime = DateTime.Now
@@ -84,9 +79,8 @@ namespace Server.Local
 
                 tmp.Sql = string.IsNullOrWhiteSpace(msSQL.Sql) ? tmp.Sql : msSQL.Sql;
                 tmp.Apikey = string.IsNullOrWhiteSpace(msSQL.ApiKey) ? tmp.Apikey : msSQL.ApiKey;
-                tmp.Timekey = string.IsNullOrWhiteSpace(msSQL.TimeKey) ? tmp.Timekey : msSQL.TimeKey;
-                tmp.Totalkey = string.IsNullOrWhiteSpace(msSQL.TotalKey) ? tmp.Totalkey : msSQL.TotalKey;                                
-                tmp.Paramskey = string.IsNullOrWhiteSpace(msSQL.Paramskey) ? tmp.Paramskey : msSQL.Paramskey;                
+                tmp.Paramskey = string.IsNullOrWhiteSpace(msSQL.Paramskey) ? tmp.Paramskey : msSQL.Paramskey;
+                tmp.Strategy = string.IsNullOrWhiteSpace(msSQL.Strategy) ? tmp.Strategy : msSQL.Strategy;
 
                 tmp.Systime = DateTime.Now;
 

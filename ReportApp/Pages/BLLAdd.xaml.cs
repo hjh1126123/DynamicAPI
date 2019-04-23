@@ -3,6 +3,7 @@ using ReportApp.INotify;
 using Server;
 using Server.Local;
 using System.Windows.Controls;
+using System.Collections.Generic;
 
 namespace ReportApp.Pages
 {
@@ -44,7 +45,8 @@ namespace ReportApp.Pages
         private void Sumbit_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             BGroup group = (BGroup)GroupCombox.SelectedItem;
-            if (group == null)
+            IApi api = (IApi)LibCombox.SelectedItem;
+            if (group == null && api == null)
                 return;
 
             var active = DBKeeper.Instance.DBObject<B_Active>().Add(new Active
@@ -54,9 +56,25 @@ namespace ReportApp.Pages
                 Describe = addNotify.ActiveDescribe
             });
 
+            List<string> paramsFormat = new List<string>();
+            foreach(var item in addNotify.Params)
+            {
+                if (item.Checked)
+                    paramsFormat.Add(item.BParam.Key);
+            }
+            string @params = string.Empty;
+            for (int pCount = 0; pCount < paramsFormat.Count; pCount++)
+            {
+                @params += paramsFormat[pCount];
+                if (pCount < paramsFormat.Count - 1)
+                    @params += ",";
+            }
             DBKeeper.Instance.DBObject<D_MsSQL>().Add(new MsSQL
             {
                 Aid = active.Aid,
+                ApiKey = api.Apikey,
+                Paramskey = @params,
+                
                 Sql = addNotify.Sql
             });
         }

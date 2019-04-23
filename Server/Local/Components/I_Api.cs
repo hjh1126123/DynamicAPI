@@ -83,6 +83,7 @@ namespace Server.Local
                     return false;
 
                 iApi.Apiname = string.IsNullOrWhiteSpace(api.ApiName) ? iApi.Apiname : api.ApiName;
+                iApi.RequestKey = string.IsNullOrWhiteSpace(api.RequestKey) ? iApi.RequestKey : api.RequestKey;
                 iApi.Sid = string.IsNullOrWhiteSpace(api.Sid) ? iApi.Sid : api.Sid;
                 iApi.Cid = string.IsNullOrWhiteSpace(api.Cid) ? iApi.Cid : api.Cid;
                 iApi.Pattern = string.IsNullOrWhiteSpace(api.Pattern) ? iApi.Pattern : api.Pattern;

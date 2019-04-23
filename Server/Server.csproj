@@ -52,6 +52,12 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Devart.Data, Version=5.0.2158.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL" />
     <Reference Include="Devart.Data.Linq, Version=4.9.1703.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL" />
     <Reference Include="Devart.Data.SQLite, Version=5.12.1366.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL" />
@@ -64,6 +70,9 @@
     </Reference>
     <Reference Include="LinqKit, Version=1.1.16.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
       <HintPath>..\packages\LinqKit.1.1.16\lib\net45\LinqKit.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz, Version=2.6.2.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.2.6.2\lib\net40\Quartz.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -79,19 +88,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBComponent.cs" />
-    <Compile Include="DBKeeper.cs" />
-    <Compile Include="EntityLocal.Designer.cs">
+    <Compile Include="Local\DBComponent.cs" />
+    <Compile Include="Local\DBKeeper.cs" />
+    <Compile Include="Local\Components\S_Log.cs" />
+    <Compile Include="Local\Components\B_Active.cs" />
+    <Compile Include="Local\Components\I_Api.cs" />
+    <Compile Include="Local\Components\B_Group.cs" />
+    <Compile Include="Local\Components\B_Params.cs" />
+    <Compile Include="Local\Components\D_MsSQL.cs" />
+    <Compile Include="Local\EntityLocal.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityLocal.lqml</DependentUpon>
     </Compile>
-    <Compile Include="Local\S_Log.cs" />
-    <Compile Include="Local\B_Active.cs" />
-    <Compile Include="Local\I_Api.cs" />
-    <Compile Include="Local\B_Group.cs" />
-    <Compile Include="Local\B_Params.cs" />
-    <Compile Include="Local\D_MsSQL.cs" />
     <Compile Include="Net\DataControl.cs" />
     <Compile Include="Net\DataModel.cs" />
     <Compile Include="Net\IData.cs" />
@@ -102,13 +111,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="EntityLocal.Diagram1.view">
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Local\EntityLocal.Diagram1.view">
       <DependentUpon>EntityLocal.lqml</DependentUpon>
     </None>
-    <None Include="EntityLocal.edps">
+    <None Include="Local\EntityLocal.edps">
       <DependentUpon>EntityLocal.lqml</DependentUpon>
     </None>
-    <None Include="EntityLocal.lqml">
+    <None Include="Local\EntityLocal.lqml">
       <Generator>DevartLinqToSqlGenerator</Generator>
       <LastGenOutput>EntityLocal.Designer.cs</LastGenOutput>
     </None>
@@ -121,6 +133,9 @@
       <Project>{398e28b6-0ad1-48cd-b43e-e5078b0bc756}</Project>
       <Name>Tool</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Quartz\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
