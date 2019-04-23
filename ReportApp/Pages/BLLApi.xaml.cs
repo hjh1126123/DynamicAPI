@@ -51,6 +51,7 @@ namespace ReportApp.Pages
                 apiNotify.Name = checkedBox.Apiname;
                 apiNotify.Describe = checkedBox.Apidescribe;
                 ChartCombox.SelectedItem = checkedBox.Chart;
+                PatternCombox.SelectedItem = checkedBox.Pattern;
             }
         }
 
