@@ -1,7 +1,7 @@
 ﻿using EntityLocal;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using Tool;
 
 namespace Server.Local
@@ -45,9 +45,9 @@ namespace Server.Local
             {
                 db.BGroups.InsertOnSubmit(new BGroup
                 {
-                    Gid = TRandom.Instance.GetRandomString(20),
+                    Gid = TRandom.Instance.GetRandomString(10),
                     Gname = group.Name,
-                    Gdescribe = group.Describe,
+                    Gdescribe = group.Describe,                    
                     Operator = "hjh",
                     Createtime = DateTime.Now,
                     Systime = DateTime.Now
@@ -74,6 +74,7 @@ namespace Server.Local
 
                 bGroup.Gname = string.IsNullOrWhiteSpace(group.Name) ? bGroup.Gname : group.Name;
                 bGroup.Gdescribe = string.IsNullOrWhiteSpace(group.Describe) ? bGroup.Gdescribe : group.Describe;
+                bGroup.Systime = DateTime.Now;
 
                 db.SubmitChanges();
 

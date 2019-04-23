@@ -20,20 +20,12 @@ namespace ReportApp
         public MainWindow()
         {
             InitializeComponent();
-
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-            Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(500);
-            }).ContinueWith(t =>
-            {
-                MainSnackbar.MessageQueue.Enqueue("欢迎来到海带宝报表监控服务端控制器");
-            }, TaskScheduler.FromCurrentSynchronizationContext());
+            //公共组件
+            Global.Instance.TheMessageBox = MainSnackbar;
 
-            DataContext = new MMainWindow(MainSnackbar.MessageQueue);
-
-            Snackbar = MainSnackbar;
+            DataContext = new MMainWindow();
         }
 
         private void NavListBox_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)

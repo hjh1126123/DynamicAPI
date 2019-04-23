@@ -86,12 +86,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityLocal.lqml</DependentUpon>
     </Compile>
+    <Compile Include="Local\S_Log.cs" />
     <Compile Include="Local\B_Active.cs" />
+    <Compile Include="Local\I_Api.cs" />
     <Compile Include="Local\B_Group.cs" />
     <Compile Include="Local\B_Params.cs" />
     <Compile Include="Local\D_MsSQL.cs" />
-    <Compile Include="Local\U_User.cs" />
-    <Compile Include="Local\U_Visiter.cs" />
     <Compile Include="Net\DataControl.cs" />
     <Compile Include="Net\DataModel.cs" />
     <Compile Include="Net\IData.cs" />

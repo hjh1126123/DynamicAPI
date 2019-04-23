@@ -8,11 +8,11 @@ namespace ReportApp.Pages
     /// <summary>
     /// ServeControl.xaml 的交互逻辑
     /// </summary>
-    public partial class Server : UserControl
+    public partial class ServeControl : UserControl
     {
         ServerNotify serverNotify;
 
-        public Server()
+        public ServeControl()
         {
             InitializeComponent();
 

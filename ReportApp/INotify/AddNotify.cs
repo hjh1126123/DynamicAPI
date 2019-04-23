@@ -1,15 +1,22 @@
 ﻿using EntityLocal;
 using PropertyChanged;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace ReportApp.INotify
 {
+    public class CheckBoxParams
+    {
+        public bool Checked { get; set; }
+        public BParam BParam { get; set; }
+    }
+
     [ImplementPropertyChanged]
     public class AddNotify
     {
         public List<BGroup> Groups { get; set; }
-        public List<BParam> Params { get; set; }
-        public List<string> Libs { get; set; }
+        public BindingList<CheckBoxParams> Params { get; set; }
+        public List<IApi> Apis { get; set; }        
         public string ActiveName { get; set; }
         public string ActiveDescribe { get; set; }
         public string Sql { get; set; }

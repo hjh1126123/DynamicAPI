@@ -1,6 +1,7 @@
-﻿using EntityLocal;
+﻿using Devart.Common;
+using EntityLocal;
 using System;
-using System.Collections.Generic;
+using Server.Local;
 
 namespace Server
 {
@@ -12,23 +13,31 @@ namespace Server
         /// <typeparam name="T">数据块</typeparam>
         /// <param name="func">执行委托</param>
         /// <returns></returns>
-        protected T Context<T>(Func<DBContext, T> func)
+        protected T Context<T>(Func<DBLocal, T> func)
         {
             T tmp = default;
-            DBContext dBContext = null;
+            DBLocal dBContext = null;
             try
             {
-                dBContext = new DBContext();
+                dBContext = new DBLocal();
                 tmp = func(dBContext);
             }
-            catch (Exception ex)
+            catch(Devart.Data.SQLite.SQLiteException ex)
             {
-                //将 ex 写入日志
+                DBKeeper.Instance.DBObject<S_Log>().Error("SQLiteException", $"错误信息：{ex.InnerException.Message}\r位置：{ex.InnerException.StackTrace}");
+            }
+            catch(Devart.Data.Linq.LinqCommandExecutionException ex)
+            {
+                DBKeeper.Instance.DBObject<S_Log>().Error("LinqCommandExecutionException", $"错误信息：{ex.InnerException.Message}\r位置：{ex.InnerException.StackTrace}");
+            }
+            catch(Exception ex)
+            {
+                DBKeeper.Instance.DBObject<S_Log>().Error("Exception", $"错误信息：{ex.InnerException.Message}\r位置：{ex.InnerException.StackTrace}");
             }
             finally
             {
                 if (dBContext == null)
-                    dBContext.Dispose();                
+                    dBContext.Dispose();
             }
             return tmp;
         }

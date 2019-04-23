@@ -3,8 +3,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iNotify="clr-namespace:ReportApp.INotify"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance iNotify:AddNotify,
+                                     IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     Loaded="BllAddLoaded"
@@ -30,7 +33,7 @@
                         ItemsSource="{Binding Groups, Mode=OneWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Gname, Mode=OneWay}" />
+                                <TextBlock Text="{Binding Gname, Mode=OneWay}" ToolTip="{Binding Gdescribe, Mode=OneWay}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
@@ -53,16 +56,30 @@
                 </DockPanel>
             </GroupBox>
             <GroupBox Grid.Row="1" Header="参数">
-                <ListBox
+                <ListView
                     Name="paramsList"
                     ItemsPanel="{DynamicResource M_ListBoxTemplate}"
                     ItemsSource="{Binding Params, Mode=OneWay}">
-                    <ListBox.ItemTemplate>
+                    <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name, Mode=OneWay}" />
+                            <CheckBox IsChecked="{Binding Checked, Mode=TwoWay}" Style="{StaticResource MaterialDesignUserForegroundCheckBox}">
+                                <CheckBox.ToolTip>
+                                    <ToolTip>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}名称：{0}&#x0a;说明：{1}">
+                                                    <Binding Path="BParam.Name" />
+                                                    <Binding Path="BParam.Describe" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </ToolTip>
+                                </CheckBox.ToolTip>
+                                <TextBlock Text="{Binding BParam.Key, Mode=OneWay}" />
+                            </CheckBox>
                         </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                    </ListView.ItemTemplate>
+                </ListView>
             </GroupBox>
         </Grid>
         <Grid Grid.Column="1">
@@ -95,10 +112,30 @@
             <StackPanel Orientation="Vertical">
                 <ComboBox
                     Name="LibCombox"
-                    materialDesign:HintAssist.Hint="选择库(*)"
+                    materialDesign:HintAssist.Hint="选择接口(*)"
                     materialDesign:HintAssist.HintOpacity=".26"
                     DockPanel.Dock="Top"
-                    ItemsSource="{Binding Libs, Mode=OneWay}" />
+                    ItemsSource="{Binding Apis, Mode=OneWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Apiname, Mode=OneWay}">
+                                <TextBlock.ToolTip>
+                                    <ToolTip>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding Mode="OneWay" StringFormat="{}指向图表：{0}&#x0a;数据获取模式:{1}&#x0a;说明：{2}">
+                                                    <Binding Mode="OneWay" Path="Chart" />
+                                                    <Binding Mode="OneWay" Path="Pattern" />
+                                                    <Binding Mode="OneWay" Path="Apidescribe" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </ToolTip>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <TextBox
                     Margin="0,10,0,0"
                     materialDesign:HintAssist.Hint="名称"

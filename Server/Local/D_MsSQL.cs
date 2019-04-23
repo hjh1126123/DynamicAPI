@@ -1,44 +1,46 @@
 ﻿using EntityLocal;
 using System;
 using System.Linq;
+using Tool;
 
 namespace Server.Local
 {
     public class MsSQL
     {
         private int id;
-        private string group;
-        private string active;
+        private string sid;
+        private string aid;
+        private string apiKey;
         private string sql;
-        private string pid;
+        private string paramskey;        
+        private string timeKey;
+        private string totalKey;
 
         public int Id { get => id; set => id = value; }
-        public string Group { get => group; set => group = value; }
-        public string Active { get => active; set => active = value; }
+        public string Sid { get => sid; set => sid = value; }
+        public string ApiKey { get => apiKey; set => apiKey = value; }
+        public string Aid { get => aid; set => aid = value; }
         public string Sql { get => sql; set => sql = value; }
-        public string Pid { get => pid; set => pid = value; }
-
+        public string Paramskey { get => paramskey; set => paramskey = value; }               
+        public string TimeKey { get => timeKey; set => timeKey = value; }
+        public string TotalKey { get => totalKey; set => totalKey = value; }        
     }
 
     public class D_MsSQL : DBComponent
     {
         /// <summary>
-        /// 查询数据
+        /// 查询某一条数据
         /// </summary>
         /// <param name="msSQL">查询对象</param>
         /// <returns></returns>
-        public DMsSQL Select(MsSQL msSQL)
+        public DMsSQL SelectOne(MsSQL msSQL)
         {
             return Context(db =>
             {
-                if (string.IsNullOrWhiteSpace(msSQL.Group) || string.IsNullOrWhiteSpace(msSQL.Active))
-                {
+                if (string.IsNullOrWhiteSpace(msSQL.Sid))
                     return new DMsSQL();
-                }
-                else
-                {
-                    return db.DMsSQLs.Where(i => i.Group.Equals(msSQL.Group) && i.Active.Equals(msSQL.Active)).FirstOrDefault();
-                }
+
+                return db.DMsSQLs.Where(i => i.Sid.Equals(msSQL.Sid)).FirstOrDefault();                
             });
         }
 
@@ -53,10 +55,13 @@ namespace Server.Local
             {
                 db.DMsSQLs.InsertOnSubmit(new DMsSQL
                 {
-                    Group = msSQL.Group,
-                    Active = msSQL.Active,
+                    Sid = TRandom.Instance.GetRandomString(10),
+                    Aid = msSQL.Aid,
+                    Apikey = msSQL.ApiKey,                    
                     Sql = msSQL.Sql,
-                    Pid = msSQL.Pid,
+                    Paramskey = msSQL.Paramskey,                    
+                    Timekey = msSQL.TimeKey,
+                    Totalkey = msSQL.TotalKey,       
                     Operator = "hjh",
                     Systime = DateTime.Now,
                     Createtime = DateTime.Now
@@ -77,17 +82,11 @@ namespace Server.Local
             {
                 var tmp = db.DMsSQLs.Where(i => i.Id == msSQL.Id).FirstOrDefault();
 
-                if (!string.IsNullOrWhiteSpace(msSQL.Group))
-                    tmp.Group = msSQL.Group;
-
-                if (!string.IsNullOrWhiteSpace(msSQL.Active))
-                    tmp.Active = msSQL.Active;
-
-                if (!string.IsNullOrWhiteSpace(msSQL.Sql))
-                    tmp.Sql = msSQL.Sql;
-
-                if (!string.IsNullOrWhiteSpace(msSQL.Pid))
-                    tmp.Pid = msSQL.Pid;
+                tmp.Sql = string.IsNullOrWhiteSpace(msSQL.Sql) ? tmp.Sql : msSQL.Sql;
+                tmp.Apikey = string.IsNullOrWhiteSpace(msSQL.ApiKey) ? tmp.Apikey : msSQL.ApiKey;
+                tmp.Timekey = string.IsNullOrWhiteSpace(msSQL.TimeKey) ? tmp.Timekey : msSQL.TimeKey;
+                tmp.Totalkey = string.IsNullOrWhiteSpace(msSQL.TotalKey) ? tmp.Totalkey : msSQL.TotalKey;                                
+                tmp.Paramskey = string.IsNullOrWhiteSpace(msSQL.Paramskey) ? tmp.Paramskey : msSQL.Paramskey;                
 
                 tmp.Systime = DateTime.Now;
 

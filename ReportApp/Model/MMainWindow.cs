@@ -8,18 +8,17 @@ namespace ReportApp.Model
     public class MMainWindow
     {
         public RouterNotify[] RouterItems { get; }
-
-        public MMainWindow(ISnackbarMessageQueue snackbarMessageQueue)
-        {
-            if (snackbarMessageQueue == null) throw new ArgumentNullException(nameof(snackbarMessageQueue));
-
+        public MMainWindow()
+        {            
             RouterItems = new[]
             {
                 new RouterNotify("主页", new Home()),
-                new RouterNotify("服务", new Pages.Server()),
+                new RouterNotify("服务", new ServeControl()),
                 new RouterNotify("业务添加", new BLLAdd()),
                 new RouterNotify("业务查看", new BLLQuery()),
                 new RouterNotify("业务组管理", new BLLGroup()),
+                new RouterNotify("参数管理", new BLLParams()),
+                new RouterNotify("接口管理", new BLLApi()),
                 new RouterNotify("主题修改",new PaletteSelector())
             };
         }

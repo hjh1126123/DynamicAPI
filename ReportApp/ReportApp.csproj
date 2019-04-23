@@ -75,10 +75,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="INotify\BLLQueryNotify.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="INotify\ApiNotify.cs" />
     <Compile Include="INotify\AddNotify.cs" />
+    <Compile Include="INotify\ParamsNotify.cs" />
     <Compile Include="INotify\GroupNotify.cs" />
-    <Compile Include="Model\MQuery.cs" />
+    <Compile Include="Pages\BLLApi.xaml.cs">
+      <DependentUpon>BLLApi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BLLParams.xaml.cs">
+      <DependentUpon>BLLParams.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BLLGroup.xaml.cs">
       <DependentUpon>BLLGroup.xaml</DependentUpon>
     </Compile>
@@ -117,6 +124,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\BLLApi.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\BLLParams.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\BLLGroup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

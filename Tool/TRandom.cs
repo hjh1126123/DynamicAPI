@@ -27,6 +27,8 @@ namespace Tool
             if (random == null)
                 return "随机数对象不存在";
 
+            int timeStamp = Convert.ToInt32((DateTime.Now - new DateTime(1970, 1, 1, 8, 0, 0)).TotalSeconds);
+
             string tmpStr = string.Empty;
             if (useNum == true) { tmpStr += "0123456789"; }
             if (useLow == true) { tmpStr += "abcdefghijklmnopqrstuvwxyz"; }
@@ -38,6 +40,8 @@ namespace Tool
             {
                 result += tmpStr.Substring(random.Next(0, tmpStr.Length - 1), 1);
             }
+            result += timeStamp;
+
             return result;
         }
     }

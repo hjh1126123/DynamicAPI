@@ -7,15 +7,14 @@ using Tool;
 namespace Server.Local
 {
     public class Active
-    {
-        private string gid;
+    {        
         private string name;
         private string describe;
+        private string gid;
 
-        public string Gid { get => gid; set => gid = value; }
         public string Name { get => name; set => name = value; }
         public string Describe { get => describe; set => describe = value; }
-        
+        public string Gid { get => gid; set => gid = value; }
     }
 
     public class B_Active : DBComponent
