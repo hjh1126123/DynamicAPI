@@ -1,6 +1,4 @@
-﻿using Server;
-using Server.Local;
-using System;
+﻿using System;
 
 namespace UnitTest
 {
@@ -8,12 +6,7 @@ namespace UnitTest
     {
         static void Main(string[] args)
         {
-            DBKeeper.Instance.DBObject<D_MsSQL>().Update(new MsSQL {
-                Id = 2,
-                Operator = "hjy"
-            });
 
-            Console.Read();
         }
     }
 }

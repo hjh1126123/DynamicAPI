@@ -1,8 +1,8 @@
-﻿using MaterialDesignThemes.Wpf;
-using ReportApp.Controls;
-using ReportApp.Model;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using MaterialDesignColors;
+using MaterialDesignThemes.Wpf;
+using Newtonsoft.Json;
+using ReportApp.ViewModel;
+using Server.Local;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -20,12 +20,32 @@ namespace ReportApp
         public MainWindow()
         {
             InitializeComponent();
+
+            //位置
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             //公共组件
             Global.Instance.TheMessageBox = MainSnackbar;
 
-            DataContext = new MMainWindow();
+            //设定主题
+            UTheme uTheme = DBKeeper.Instance.DBObject<U_Theme>().Select();
+            PaletteHelper paletteHelper = new PaletteHelper();
+            if (uTheme.Isdark != null)
+            {                
+                paletteHelper.SetLightDark(uTheme.Isdark.GetValueOrDefault());
+                Global.Instance.IsDark = uTheme.Isdark.GetValueOrDefault();
+            }                
+            if (!string.IsNullOrWhiteSpace(uTheme.Primary))
+            {
+                paletteHelper.ReplacePrimaryColor(JsonConvert.DeserializeObject<Swatch>(uTheme.Primary));
+            }
+            if (!string.IsNullOrWhiteSpace(uTheme.Accent))
+            {
+                paletteHelper.ReplaceAccentColor(JsonConvert.DeserializeObject<Swatch>(uTheme.Accent));
+            }
+
+
+            DataContext = new MainWindowViewModel();
         }
 
         private void NavListBox_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)

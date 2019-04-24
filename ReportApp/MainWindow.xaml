@@ -2,8 +2,8 @@
     x:Class="ReportApp.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ViewModel="clr-namespace:ReportApp.ViewModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:iNotify="clr-namespace:ReportApp.INotify"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="海带宝监控控制维护端"
@@ -44,7 +44,7 @@
                         PreviewMouseLeftButtonUp="NavListBox_PreviewMouseLeftButtonUp"
                         SelectedIndex="0">
                         <ListBox.ItemTemplate>
-                            <DataTemplate DataType="iNotify:RouterItem">
+                            <DataTemplate DataType="ViewModel:RouterItem">
                                 <TextBlock Margin="32,0,32,0" Text="{Binding Name}" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>

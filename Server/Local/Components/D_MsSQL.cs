@@ -1,7 +1,7 @@
-﻿using EntityLocal;
-using System;
+﻿using System;
 using System.Linq;
 using Tool;
+using System.Collections.Generic;
 
 namespace Server.Local
 {
@@ -9,13 +9,13 @@ namespace Server.Local
     {
         private int id;
         private string aid;
-        private string apiKey;
+        private string apiId;
         private string sql;
         private string paramskey;
         private string strategy;
 
         public int Id { get => id; set => id = value; }
-        public string ApiKey { get => apiKey; set => apiKey = value; }
+        public string ApiId { get => apiId; set => apiId = value; }
         public string Aid { get => aid; set => aid = value; }
         public string Sql { get => sql; set => sql = value; }
         public string Paramskey { get => paramskey; set => paramskey = value; }
@@ -24,6 +24,14 @@ namespace Server.Local
 
     public class D_MsSQL : DBComponent
     {
+        public List<DMsSQL> Select()
+        {
+            return Context(db =>
+            {
+                return db.DMsSQLs.ToList();
+            });
+        }
+
         /// <summary>
         /// 查询某一条数据
         /// </summary>
@@ -53,10 +61,10 @@ namespace Server.Local
                 {
                     Sid = TRandom.Instance.GetRandomString(10),
                     Aid = msSQL.Aid,
-                    Apikey = msSQL.ApiKey,
+                    Apiid = msSQL.ApiId,
                     Sql = msSQL.Sql,
                     Paramskey = msSQL.Paramskey,
-                    Strategy = msSQL.Strategy,
+                    Strategy = msSQL.Strategy,                    
                     Operator = "hjh",
                     Systime = DateTime.Now,
                     Createtime = DateTime.Now
@@ -78,7 +86,7 @@ namespace Server.Local
                 var tmp = db.DMsSQLs.Where(i => i.Id == msSQL.Id).FirstOrDefault();
 
                 tmp.Sql = string.IsNullOrWhiteSpace(msSQL.Sql) ? tmp.Sql : msSQL.Sql;
-                tmp.Apikey = string.IsNullOrWhiteSpace(msSQL.ApiKey) ? tmp.Apikey : msSQL.ApiKey;
+                tmp.Apiid = string.IsNullOrWhiteSpace(msSQL.ApiId) ? tmp.Apiid : msSQL.ApiId;
                 tmp.Paramskey = string.IsNullOrWhiteSpace(msSQL.Paramskey) ? tmp.Paramskey : msSQL.Paramskey;
                 tmp.Strategy = string.IsNullOrWhiteSpace(msSQL.Strategy) ? tmp.Strategy : msSQL.Strategy;
 

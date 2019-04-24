@@ -46,6 +46,9 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PropertyChanged2, Version=2.6.0.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged2.Fody.2.6.0\lib\net40\PropertyChanged2.dll</HintPath>
     </Reference>
@@ -76,21 +79,21 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Global.cs" />
-    <Compile Include="INotify\ApiNotify.cs" />
-    <Compile Include="INotify\AddNotify.cs" />
-    <Compile Include="INotify\ParamsNotify.cs" />
-    <Compile Include="INotify\GroupNotify.cs" />
-    <Compile Include="Pages\BLLApi.xaml.cs">
-      <DependentUpon>BLLApi.xaml</DependentUpon>
+    <Compile Include="ViewModel\ApiViewModel.cs" />
+    <Compile Include="ViewModel\AddViewModel.cs" />
+    <Compile Include="ViewModel\ParamsViewModel.cs" />
+    <Compile Include="ViewModel\GroupViewModel.cs" />
+    <Compile Include="Panel\PanelApi.xaml.cs">
+      <DependentUpon>PanelApi.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BLLParams.xaml.cs">
-      <DependentUpon>BLLParams.xaml</DependentUpon>
+    <Compile Include="Panel\PanelParams.xaml.cs">
+      <DependentUpon>PanelParams.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BLLGroup.xaml.cs">
-      <DependentUpon>BLLGroup.xaml</DependentUpon>
+    <Compile Include="Panel\PanelGroup.xaml.cs">
+      <DependentUpon>PanelGroup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BLLAdd.xaml.cs">
-      <DependentUpon>BLLAdd.xaml</DependentUpon>
+    <Compile Include="Panel\PanelAdd.xaml.cs">
+      <DependentUpon>PanelAdd.xaml</DependentUpon>
     </Compile>
     <Compile Include="ServeTemplate\IServeTemplate.cs" />
     <Page Include="Controls\Palette.xaml">
@@ -117,62 +120,60 @@
       <DependentUpon>MessageDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extension\NotifyPropertyChangedExtension.cs" />
-    <Compile Include="INotify\HomeNotify.cs" />
-    <Compile Include="INotify\RouterNotify.cs" />
-    <Compile Include="INotify\ServerNotify.cs" />
+    <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="ViewModel\RouterViewModel.cs" />
+    <Compile Include="ViewModel\ServerViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\BLLApi.xaml">
+    <Page Include="Panel\PanelApi.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\BLLParams.xaml">
+    <Page Include="Panel\PanelParams.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\BLLGroup.xaml">
+    <Page Include="Panel\PanelGroup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\BLLAdd.xaml">
+    <Page Include="Panel\PanelAdd.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Home.xaml">
+    <Page Include="Panel\PanelHome.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\PaletteSelector.xaml">
+    <Page Include="Panel\PanelPaletteSelector.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ServeControl.xaml">
+    <Page Include="Panel\PanelServe.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\BLLQuery.xaml">
+    <Page Include="Panel\PanelQuery.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\MHome.cs" />
-    <Compile Include="Model\MMainWindow.cs" />
-    <Compile Include="Model\MPaletteSelector.cs" />
-    <Compile Include="Model\MServerControl.cs" />
-    <Compile Include="Pages\Home.xaml.cs">
-      <DependentUpon>Home.xaml</DependentUpon>
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\PaletteSelectorViewModel.cs" />
+    <Compile Include="Panel\PanelHome.xaml.cs">
+      <DependentUpon>PanelHome.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PaletteSelector.xaml.cs">
-      <DependentUpon>PaletteSelector.xaml</DependentUpon>
+    <Compile Include="Panel\PanelPaletteSelector.xaml.cs">
+      <DependentUpon>PanelPaletteSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ServeControl.xaml.cs">
-      <DependentUpon>ServeControl.xaml</DependentUpon>
+    <Compile Include="Panel\PanelServe.xaml.cs">
+      <DependentUpon>PanelServe.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BLLQuery.xaml.cs">
-      <DependentUpon>BLLQuery.xaml</DependentUpon>
+    <Compile Include="Panel\PanelQuery.xaml.cs">
+      <DependentUpon>PanelQuery.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -221,12 +222,12 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Fody.3.3.5\build\Fody.targets" Condition="Exists('..\packages\Fody.3.3.5\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.3.3.5\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.3.3.5\build\Fody.targets'))" />
     <Error Condition="!Exists('..\packages\PropertyChanged2.Fody.2.6.0\build\PropertyChanged2.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PropertyChanged2.Fody.2.6.0\build\PropertyChanged2.Fody.props'))" />
+    <Error Condition="!Exists('..\packages\Fody.5.0.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.5.0.0\build\Fody.targets'))" />
   </Target>
+  <Import Project="..\packages\Fody.5.0.0\build\Fody.targets" Condition="Exists('..\packages\Fody.5.0.0\build\Fody.targets')" />
 </Project>

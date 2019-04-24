@@ -14,6 +14,12 @@ namespace ReportApp
             }
         }
 
+        /// <summary>
+        /// 黑色主题
+        /// </summary>
+        public bool IsDark { get; set; }
+
+
         public Snackbar TheMessageBox { get; set; }
         public void ShowMessage(string message)
         {

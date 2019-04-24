@@ -1,7 +1,6 @@
-﻿using EntityLocal;
-using System;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Tool;
 
 namespace Server.Local
@@ -52,7 +51,7 @@ namespace Server.Local
             {
                 db.IApis.InsertOnSubmit(new IApi
                 {
-                    Apikey = TRandom.Instance.GetRandomString(10),
+                    Apiid = TRandom.Instance.GetRandomString(10),
                     Apiname = api.ApiName,
                     Apidescribe = api.ApiDescribe,
                     RequestKey = api.RequestKey,

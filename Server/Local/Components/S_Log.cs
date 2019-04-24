@@ -1,8 +1,6 @@
-﻿using EntityLocal;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Tool;
 
 namespace Server.Local
 {
@@ -64,7 +62,7 @@ namespace Server.Local
         /// <returns></returns>
         public bool IsOk(int id)
         {
-            return Context(db =>
+            return ContextNoLog(db =>
             {
                 SLog sLog = db.SLogs.Where(i => i.Id == id).FirstOrDefault();
                 sLog.Isok = true;
@@ -82,7 +80,7 @@ namespace Server.Local
         /// <returns></returns>
         private bool Add(SLog sLog)
         {
-            return Context(db =>
+            return ContextNoLog(db =>
             {
                 db.SLogs.InsertOnSubmit(sLog);
 

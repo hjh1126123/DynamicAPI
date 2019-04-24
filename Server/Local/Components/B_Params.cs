@@ -1,5 +1,4 @@
-﻿using EntityLocal;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Tool;
@@ -12,13 +11,16 @@ namespace Server.Local
         private string pid;
         private string name;
         private string key;
+        private bool multiple;
         private string describe;
 
+        public long Id { get => id; set => id = value; }
         public string Pid { get => pid; set => pid = value; }
         public string Name { get => name; set => name = value; }
         public string Key { get => key; set => key = value; }
         public string Describe { get => describe; set => describe = value; }
-        public long Id { get => id; set => id = value; }
+        public bool Multiple { get => multiple; set => multiple = value; }
+
     }
 
     public class B_Params : DBComponent
@@ -32,6 +34,19 @@ namespace Server.Local
             return Context(db =>
             {
                 return db.BParams.ToList();
+            });
+        }
+
+        /// <summary>
+        /// 根据pid获取某个值
+        /// </summary>
+        /// <param name="pid">pid</param>
+        /// <returns></returns>
+        public BParam Select(string pid)
+        {
+            return Context(db =>
+            {
+                return db.BParams.Where(i => i.Pid.Equals(pid)).FirstOrDefault();
             });
         }
 
@@ -50,6 +65,7 @@ namespace Server.Local
                     Name = @params.Name,
                     Describe = @params.Describe,
                     Key = @params.Key,
+                    Multiple = @params.Multiple,
                     Operator = "hjh",
                     Createtime = DateTime.Now,
                     Systime = DateTime.Now
@@ -76,6 +92,7 @@ namespace Server.Local
                 bParam.Name = string.IsNullOrWhiteSpace(@params.Name) ? bParam.Name : @params.Name;
                 bParam.Describe = string.IsNullOrWhiteSpace(@params.Describe) ? bParam.Describe : @params.Describe;
                 bParam.Key = string.IsNullOrWhiteSpace(@params.Key) ? bParam.Key : @params.Key;
+                bParam.Multiple = @params.Multiple;
 
                 bParam.Systime = DateTime.Now;
 

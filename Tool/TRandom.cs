@@ -33,7 +33,7 @@ namespace Tool
             if (useNum == true) { tmpStr += "0123456789"; }
             if (useLow == true) { tmpStr += "abcdefghijklmnopqrstuvwxyz"; }
             if (useUpp == true) { tmpStr += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; }
-            if (useSpe == true) { tmpStr += "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"; }
+            if (useSpe == true) { tmpStr += "!\"#$%&'()*+-./:;<=>?@[\\]^_`{|}~"; }
 
             string result = string.Empty;
             for (int i = 0; i < length; i++)

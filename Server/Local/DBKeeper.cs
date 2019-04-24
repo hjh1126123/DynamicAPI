@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 
-namespace Server
+namespace Server.Local
 {
     public class DBKeeper
     {
