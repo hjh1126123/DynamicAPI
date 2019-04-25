@@ -3,7 +3,7 @@ using System.Linq;
 using Tool;
 using System.Collections.Generic;
 
-namespace Server.Local
+namespace Server.DBLocal
 {
     public class MsSQL
     {

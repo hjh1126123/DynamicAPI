@@ -10,6 +10,7 @@
     Width="1080"
     Height="768"
     Background="{DynamicResource MaterialDesignPaper}"
+    Closed="Window_Closed"
     FontFamily="{DynamicResource MaterialDesignFont}"
     ResizeMode="CanMinimize"
     TextElement.FontSize="15"

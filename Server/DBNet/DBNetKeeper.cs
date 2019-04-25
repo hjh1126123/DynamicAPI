@@ -1,52 +1,26 @@
-﻿using Server.Local;
+﻿using Server.DBLocal;
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Tool;
 
-namespace Server.Net
+namespace Server.DBNet
 {
-    /// <summary>
-    /// 参数化模型
-    /// </summary>
-    public class SqlParameterModel
-    {
-        string pid;
-        object value;
-        List<string> values;
-
-        public string Pid { get => pid; set => pid = value; }
-        public object Value { get => value; set => this.value = value; }
-        public List<string> Values { get => values; set => values = value; }
-    }
-
     /// <summary>
     /// 数据控制器
     /// </summary>
-    public class ConnNet
-    {
-        const string connectionStringKey = "Net";
-
-
+    public class DBNetKeeper : IServer
+    {        
         private struct SQL
         {
             public string key;
             public SqlConnection sqlConnection;
         }
-        private static readonly Lazy<ConnNet> lazyInstance = new Lazy<ConnNet>(() => new ConnNet());
-        public static ConnNet Instance
-        {
-            get
-            {
-                return lazyInstance.Value;
-            }
-        }
-
         private ConcurrentQueue<SQL> isUnUse;
         private ConcurrentDictionary<string, SqlConnection> isUse;
         private readonly string connText = string.Empty;
@@ -64,7 +38,8 @@ namespace Server.Net
         /// 等待锁
         /// </summary>
         private readonly object waitLock = new object();
-        /// <summary>
+
+        /// <summary
         /// 等待一个对象
         /// </summary>
         /// <returns></returns>
@@ -131,13 +106,13 @@ namespace Server.Net
                 }
                 else
                 {
-                    DBKeeper.Instance.DBObject<S_Log>().Error("DataControl-OpenConn-CustomEx", $"说明：isUnUse队列移除失败 \r位置：DataControl 114");
+                    serverKeeper.DBLocalKeeper.DBObject<S_Log>().Error("DataControl-OpenConn-CustomEx", $"说明：isUnUse队列移除失败 \r位置：DataControl 114");
                 }
             }
 
             if (sQL.sqlConnection.State == ConnectionState.Open)
             {
-                DBKeeper.Instance.DBObject<S_Log>().Error("DataControl-OpenConn-CustomEx", $"说明：数据库连接仍然处在开启状态 \r位置：DataControl 126");
+                serverKeeper.DBLocalKeeper.DBObject<S_Log>().Error("DataControl-OpenConn-CustomEx", $"说明：数据库连接仍然处在开启状态 \r位置：DataControl 126");
             }
             else
             {
@@ -164,41 +139,72 @@ namespace Server.Net
             }
             catch (ArgumentNullException ex)
             {
-                DBKeeper.Instance.DBObject<S_Log>().Error("DataControl-FreeConn-ArgumentNullException", $"说明：{ex.InnerException.Message}\r位置：{ex.InnerException.StackTrace}");
+                serverKeeper.DBLocalKeeper.DBObject<S_Log>().Error("DataControl-FreeConn-ArgumentNullException", $"说明：{ex.InnerException.Message}\r位置：{ex.InnerException.StackTrace}");
             }
         }
+
 
         /// <summary>
         /// 添加参数
         /// </summary>
         /// <param name="sqlCommand"></param>
         /// <param name="model"></param>
-        private void AddParameters(SqlCommand sqlCommand, List<SqlParameterModel> pids)
+        private void AddParameters(SqlCommand sqlCommand, List<string> pids)
         {
             foreach (var pid in pids)
             {
-                var bPar = DBKeeper.Instance.DBObject<B_Params>().Select(pid.Pid);
+                BParam bPar = serverKeeper.DBLocalKeeper.DBObject<B_Params>().Select(pid);
+                IParams iPar = null;
+                if (ParamsSave.ContainsKey(bPar.Key))
+                {            
+                    iPar = ParamsSave[bPar.Key];
+                }
+                else
+                    continue;
+
+
                 if (bPar.Multiple.GetValueOrDefault())
                 {
-                    for (int count = 0; count < pid.Values.Count; count++)
+                    string parKeys = "(";
+                    for (int count = 0; count < iPar.GetValues().Count; count++)
                     {
-                        sqlCommand.Parameters.Add(new SqlParameter($"{bPar.Key}{count}", pid.Values[count]));
+                        string tmpKey = $"{bPar.Key}{count}";
+                        sqlCommand.Parameters.Add(new SqlParameter(tmpKey, iPar.GetValues()[count]));
+                        parKeys += tmpKey;
+                        if (count < iPar.GetValues().Count - 1)
+                            parKeys += ',';
                     }
+                    parKeys += ")";
+                    sqlCommand.CommandText = sqlCommand.CommandText.Replace(bPar.Key, parKeys);
                 }
                 else
                 {
-                    sqlCommand.Parameters.Add(new SqlParameter(bPar.Key, pid.Value));
+                    sqlCommand.Parameters.Add(new SqlParameter(bPar.Key, iPar.GetValue()));
                 }
             }
         }
 
         /// <summary>
-        /// 执行查询
+        /// 执行查询带参数
         /// </summary>
         /// <param name="data">数据内容</param>
         /// <param name="params">参数</param>
         /// <returns></returns>
-        public DataTable Select(string SQL, List<SqlParameterModel> pids)
+        public DataTable Select(string SQL, List<string> pids)
+        {
+            return Select(SQL, sqlcommand =>
+             {
+                 AddParameters(sqlcommand, pids);
+             });            
+        }
+
+        /// <summary>
+        /// 执行查询不带参数
+        /// </summary>
+        /// <param name="SQL"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public DataTable Select(string SQL, Action<SqlCommand> action = null)
         {
             SQL sQL = OpenConn();
             SqlCommand sqlCommand = null;
@@ -209,16 +215,16 @@ namespace Server.Net
             {
                 sqlCommand = sQL.sqlConnection.CreateCommand();
                 sqlCommand.CommandText = SQL;
-                AddParameters(sqlCommand, pids);
+                action?.Invoke(sqlCommand);
                 sqlCommand.ExecuteNonQuery();
                 sqlDataAdapter = new SqlDataAdapter(sqlCommand);
                 dataSet = new DataSet();
                 sqlDataAdapter.Fill(dataSet);
                 dataTable = dataSet.Tables[0];
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                DBKeeper.Instance.DBObject<S_Log>().Error("DataControl-Select-Exception", $"说明：{ex.InnerException.Message}\r位置：{ex.InnerException.StackTrace}");
+                serverKeeper.DBLocalKeeper.DBObject<S_Log>().Error("DataControl-Select-Exception", $"说明：{ex.Message}\r位置：{ex.StackTrace}");
             }
             finally
             {
@@ -237,15 +243,31 @@ namespace Server.Net
         }
 
         /// <summary>
+        /// 参数保存
+        /// </summary>
+        public ConcurrentDictionary<string, IParams> ParamsSave;
+        
+        /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="maxConn">最大连接数</param>
-        public ConnNet(int maxConn = 20)
+        /// <param name="serverKeeper">服务管理员</param>
+        /// <param name="connectionStringKey">连接字段(app.config)</param>
+        /// <param name="maxConn"></param>
+        public DBNetKeeper(ServerKeeper serverKeeper, string connectionStringKey, int maxConn = 20) : base(serverKeeper)
         {
             connText = ConfigurationManager.ConnectionStrings[connectionStringKey].ConnectionString;
             isUnUse = new ConcurrentQueue<SQL>();
             isUse = new ConcurrentDictionary<string, SqlConnection>();
+
+            //最大连接数绑定
             this.maxConn = maxConn;
+
+            ParamsSave = new ConcurrentDictionary<string, IParams>();
+            //参数导入
+            foreach (var item in TReflection.Instance.GetClasses<IParams>("Server.Net.ParamsComponents"))
+            {                
+                ParamsSave.AddOrUpdate(item.GetKey(), item, (o_k, o_v) => item);
+            }
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Server.Local
+namespace Server.DBLocal
 {
     public class Log
     {
@@ -37,6 +37,7 @@ namespace Server.Local
                 Createtime = DateTime.Now,
                 Level = 0,
                 Name = name,
+                Operator = "hjh",
                 Log = log,
                 Isok = true
             });
@@ -50,6 +51,7 @@ namespace Server.Local
                 Createtime = DateTime.Now,
                 Level = 1,
                 Name = name,
+                Operator = "hjh",
                 Log = log,
                 Isok = false
             });

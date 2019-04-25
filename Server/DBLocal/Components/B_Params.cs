@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Tool;
 
-namespace Server.Local
+namespace Server.DBLocal
 {
     public class Params
     {

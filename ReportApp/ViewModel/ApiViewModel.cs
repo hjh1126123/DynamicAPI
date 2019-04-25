@@ -1,5 +1,5 @@
 ﻿using PropertyChanged;
-using Server.Local;
+using Server.DBLocal;
 using System.Collections.Generic;
 
 namespace ReportApp.ViewModel

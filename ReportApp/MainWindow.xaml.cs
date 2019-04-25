@@ -2,7 +2,8 @@
 using MaterialDesignThemes.Wpf;
 using Newtonsoft.Json;
 using ReportApp.ViewModel;
-using Server.Local;
+using Server;
+using Server.DBLocal;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -28,7 +29,7 @@ namespace ReportApp
             Global.Instance.TheMessageBox = MainSnackbar;
 
             //设定主题
-            UTheme uTheme = DBKeeper.Instance.DBObject<U_Theme>().Select();
+            UTheme uTheme = ServerKeeper.Instance.DBLocalKeeper.DBObject<U_Theme>().Select();
             PaletteHelper paletteHelper = new PaletteHelper();
             if (uTheme.Isdark != null)
             {                
@@ -79,9 +80,10 @@ namespace ReportApp
                 WindowState = WindowState.Normal;
         }
 
-        private void Close(object sender, RoutedEventArgs e)
-        {
-            Close();
+        private void Window_Closed(object sender, System.EventArgs e)
+        {            
+            ServerKeeper.Instance.Dispose();
+            Application.Current.Shutdown();
         }
     }
 }

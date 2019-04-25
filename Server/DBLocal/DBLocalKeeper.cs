@@ -1,30 +1,14 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 
-namespace Server.Local
+namespace Server.DBLocal
 {
-    public class DBKeeper
+    public class DBLocalKeeper : IServer
     {
-        /// <summary>
-        /// 懒加载单例
-        /// </summary>
-        private static readonly Lazy<DBKeeper> lazyInstance = new Lazy<DBKeeper>(() => new DBKeeper());
-
-        /// <summary>
-        /// 实例
-        /// </summary>
-        public static DBKeeper Instance
-        {
-            get
-            {
-                return lazyInstance.Value;
-            }
-        }
-
         /// <summary>
         /// 数据组件存储对象
         /// </summary>
         private readonly ConcurrentDictionary<string, DBComponent> componentsSave;
+
         /// <summary>
         /// 获取数据组件
         /// </summary>
@@ -46,7 +30,7 @@ namespace Server.Local
             }
         }
 
-        private DBKeeper()
+        public DBLocalKeeper(ServerKeeper serverKeeper) : base(serverKeeper)
         {
             componentsSave = new ConcurrentDictionary<string, DBComponent>();
         }

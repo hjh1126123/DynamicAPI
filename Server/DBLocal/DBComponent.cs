@@ -1,7 +1,7 @@
-﻿using Server.Local;
+﻿using Server.DBLocal;
 using System;
 
-namespace Server
+namespace Server.DBLocal
 {
     public abstract class DBComponent
     {
@@ -22,15 +22,15 @@ namespace Server
             }
             catch (Devart.Data.SQLite.SQLiteException ex)
             {
-                DBKeeper.Instance.DBObject<S_Log>().Error("SQLiteException", $"错误信息：{ex.InnerException.Message}\r位置：{ex.InnerException.StackTrace}");
+                ServerKeeper.Instance.DBLocalKeeper.DBObject<S_Log>().Error("SQLiteException", $"错误信息：{ex.InnerException.Message}\r位置：{ex.InnerException.StackTrace}");
             }
             catch (Devart.Data.Linq.LinqCommandExecutionException ex)
             {
-                DBKeeper.Instance.DBObject<S_Log>().Error("LinqCommandExecutionException", $"错误信息：{ex.InnerException.Message}\r位置：{ex.InnerException.StackTrace}");
+                ServerKeeper.Instance.DBLocalKeeper.DBObject<S_Log>().Error("LinqCommandExecutionException", $"错误信息：{ex.InnerException.Message}\r位置：{ex.InnerException.StackTrace}");
             }
             catch (Exception ex)
             {
-                DBKeeper.Instance.DBObject<S_Log>().Error("Exception", $"错误信息：{ex.InnerException.Message}\r位置：{ex.InnerException.StackTrace}");
+                ServerKeeper.Instance.DBLocalKeeper.DBObject<S_Log>().Error("Exception", $"错误信息：{ex.InnerException.Message}\r位置：{ex.InnerException.StackTrace}");
             }
             finally
             {

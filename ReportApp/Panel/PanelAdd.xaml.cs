@@ -1,6 +1,6 @@
 ﻿using ReportApp.ViewModel;
 using Server;
-using Server.Local;
+using Server.DBLocal;
 using Server.Strategy;
 using System.Collections.Generic;
 using System.Windows.Controls;
@@ -27,11 +27,11 @@ namespace ReportApp.Panel
 
         private void BllAddLoaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            addVM.Groups = DBKeeper.Instance.DBObject<B_Group>().SelectAll();
-            addVM.Apis = DBKeeper.Instance.DBObject<I_Api>().SelectAll();
+            addVM.Groups = ServerKeeper.Instance.DBLocalKeeper.DBObject<B_Group>().SelectAll();
+            addVM.Apis = ServerKeeper.Instance.DBLocalKeeper.DBObject<I_Api>().SelectAll();
 
             addVM.Params = new System.ComponentModel.BindingList<CheckBoxParams>();
-            var listP = DBKeeper.Instance.DBObject<B_Params>().SelectAll();
+            var listP = ServerKeeper.Instance.DBLocalKeeper.DBObject<B_Params>().SelectAll();
             foreach (var i in listP)
             {
                 addVM.Params.Add(new CheckBoxParams
@@ -40,7 +40,12 @@ namespace ReportApp.Panel
                     BParam = i
                 });
             }
-            addVM.Strategys = ServerManger.Instance.Strategys;
+            List<StrategyModel> strategyModels = new List<StrategyModel>();
+            foreach(var key in ServerKeeper.Instance.StrategyKeeper.Strategys.Keys)
+            {
+                strategyModels.Add(ServerKeeper.Instance.StrategyKeeper.Strategys[key]);
+            }
+            addVM.Strategys = strategyModels;
         }
 
         private void Sumbit_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -51,7 +56,7 @@ namespace ReportApp.Panel
             if (group == null || api == null || strategyModel == null)
                 return;
 
-            var active = DBKeeper.Instance.DBObject<B_Active>().Add(new Active
+            var active = ServerKeeper.Instance.DBLocalKeeper.DBObject<B_Active>().Add(new Active
             {
                 Gid = group.Gid,
                 Name = addVM.ActiveName,
@@ -71,7 +76,7 @@ namespace ReportApp.Panel
                 if (pCount < paramsFormat.Count - 1)
                     @params += ",";
             }
-            DBKeeper.Instance.DBObject<D_MsSQL>().Add(new MsSQL
+            ServerKeeper.Instance.DBLocalKeeper.DBObject<D_MsSQL>().Add(new MsSQL
             {
                 Aid = active.Aid,
                 ApiId = api.Apiid,

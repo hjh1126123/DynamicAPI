@@ -3,8 +3,9 @@ using MaterialDesignThemes.Wpf;
 using ReportApp.Command;
 using System.Collections.Generic;
 using System.Windows.Input;
-using Server.Local;
+using Server.DBLocal;
 using Newtonsoft.Json;
+using Server;
 
 namespace ReportApp.ViewModel
 {
@@ -29,7 +30,7 @@ namespace ReportApp.ViewModel
         {
             new PaletteHelper().SetLightDark(isDark);
 
-            DBKeeper.Instance.DBObject<U_Theme>().Update(new Theme
+            ServerKeeper.Instance.DBLocalKeeper.DBObject<U_Theme>().Update(new Theme
             {
                 Dark = isDark
             });
@@ -52,7 +53,7 @@ namespace ReportApp.ViewModel
         {           
             new PaletteHelper().ReplacePrimaryColor(swatch);
 
-            DBKeeper.Instance.DBObject<U_Theme>().Update(new Theme
+            ServerKeeper.Instance.DBLocalKeeper.DBObject<U_Theme>().Update(new Theme
             {
                 Primary = JsonConvert.SerializeObject(swatch)
             });
@@ -71,7 +72,7 @@ namespace ReportApp.ViewModel
         {
             new PaletteHelper().ReplaceAccentColor(swatch);
 
-            DBKeeper.Instance.DBObject<U_Theme>().Update(new Theme
+            ServerKeeper.Instance.DBLocalKeeper.DBObject<U_Theme>().Update(new Theme
             {
                 Accent = JsonConvert.SerializeObject(swatch)
             });

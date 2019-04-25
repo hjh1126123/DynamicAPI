@@ -1,5 +1,6 @@
 ﻿using ReportApp.ViewModel;
-using Server.Local;
+using Server;
+using Server.DBLocal;
 using System.Windows.Controls;
 
 namespace ReportApp.Panel
@@ -25,7 +26,7 @@ namespace ReportApp.Panel
 
         private void BLLGroupLoaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            PVM.Params = DBKeeper.Instance.DBObject<B_Params>().SelectAll();
+            PVM.Params = ServerKeeper.Instance.DBLocalKeeper.DBObject<B_Params>().SelectAll();
         }
 
         private void GroupList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -46,7 +47,7 @@ namespace ReportApp.Panel
             bool isComplete;
             if (checkedBox == null)
             {
-                isComplete = DBKeeper.Instance.DBObject<B_Params>().Add(new Params
+                isComplete = ServerKeeper.Instance.DBLocalKeeper.DBObject<B_Params>().Add(new Params
                 {
                     Name = PVM.Name,
                     Describe = PVM.Describe,
@@ -56,7 +57,7 @@ namespace ReportApp.Panel
             }
             else
             {
-                isComplete = DBKeeper.Instance.DBObject<B_Params>().Update(new Params
+                isComplete = ServerKeeper.Instance.DBLocalKeeper.DBObject<B_Params>().Update(new Params
                 {
                     Id = checkedBox.Id,
                     Name = PVM.Name,
@@ -67,7 +68,7 @@ namespace ReportApp.Panel
             }
             if (isComplete)
             {
-                PVM.Params = DBKeeper.Instance.DBObject<B_Params>().SelectAll();
+                PVM.Params = ServerKeeper.Instance.DBLocalKeeper.DBObject<B_Params>().SelectAll();
                 if (checkedBox != null)
                 {
                     ParamsList.SelectedItem = checkedBox;
@@ -89,9 +90,9 @@ namespace ReportApp.Panel
             if (checkedBox == null)
                 return;
 
-            if (DBKeeper.Instance.DBObject<B_Params>().Delete(new Params { Id = checkedBox.Id }))
+            if (ServerKeeper.Instance.DBLocalKeeper.DBObject<B_Params>().Delete(new Params { Id = checkedBox.Id }))
             {
-                PVM.Params = DBKeeper.Instance.DBObject<B_Params>().SelectAll();
+                PVM.Params = ServerKeeper.Instance.DBLocalKeeper.DBObject<B_Params>().SelectAll();
             }
         }
 

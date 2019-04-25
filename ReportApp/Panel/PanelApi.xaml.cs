@@ -1,5 +1,6 @@
 ﻿using ReportApp.ViewModel;
-using Server.Local;
+using Server;
+using Server.DBLocal;
 using System.Collections.Generic;
 using System.Windows.Controls;
 
@@ -26,7 +27,7 @@ namespace ReportApp.Panel
 
         private void BLLGroupLoaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            apiVM.Apis = DBKeeper.Instance.DBObject<I_Api>().SelectAll();
+            apiVM.Apis = ServerKeeper.Instance.DBLocalKeeper.DBObject<I_Api>().SelectAll();
             apiVM.Charts = new List<string>
             {
                 "bar",
@@ -65,7 +66,7 @@ namespace ReportApp.Panel
             bool isComplete;
             if (checkedBox == null)
             {
-                isComplete = DBKeeper.Instance.DBObject<I_Api>().Add(new Api
+                isComplete = ServerKeeper.Instance.DBLocalKeeper.DBObject<I_Api>().Add(new Api
                 {
                     ApiName = apiVM.Name,
                     ApiDescribe = apiVM.Describe,
@@ -76,7 +77,7 @@ namespace ReportApp.Panel
             }
             else
             {
-                isComplete = DBKeeper.Instance.DBObject<I_Api>().Update(new Api
+                isComplete = ServerKeeper.Instance.DBLocalKeeper.DBObject<I_Api>().Update(new Api
                 {
                     Id = checkedBox.Id,
                     ApiName = apiVM.Name,
@@ -88,7 +89,7 @@ namespace ReportApp.Panel
             }
             if (isComplete)
             {
-                apiVM.Apis = DBKeeper.Instance.DBObject<I_Api>().SelectAll();
+                apiVM.Apis = ServerKeeper.Instance.DBLocalKeeper.DBObject<I_Api>().SelectAll();
                 if (checkedBox != null)
                 {
                     ApiList.SelectedItem = checkedBox;
@@ -114,9 +115,9 @@ namespace ReportApp.Panel
             if (checkedBox == null)
                 return;
 
-            if (DBKeeper.Instance.DBObject<I_Api>().Delete(new Api { Id = checkedBox.Id }))
+            if (ServerKeeper.Instance.DBLocalKeeper.DBObject<I_Api>().Delete(new Api { Id = checkedBox.Id }))
             {
-                apiVM.Apis = DBKeeper.Instance.DBObject<I_Api>().SelectAll();
+                apiVM.Apis = ServerKeeper.Instance.DBLocalKeeper.DBObject<I_Api>().SelectAll();
             }
         }
     }

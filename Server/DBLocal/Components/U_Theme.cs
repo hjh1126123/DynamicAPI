@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Server.Local
+namespace Server.DBLocal
 {
     public class Theme
     {

@@ -1,5 +1,6 @@
 ﻿using ReportApp.ViewModel;
-using Server.Local;
+using Server;
+using Server.DBLocal;
 using System.Windows.Controls;
 
 namespace ReportApp.Panel
@@ -25,7 +26,7 @@ namespace ReportApp.Panel
 
         private void BLLGroupLoaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            GVM.Groups = DBKeeper.Instance.DBObject<B_Group>().SelectAll();
+            GVM.Groups = ServerKeeper.Instance.DBLocalKeeper.DBObject<B_Group>().SelectAll();
         }
 
         private void GroupList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -44,7 +45,7 @@ namespace ReportApp.Panel
             bool isComplete;
             if (checkedBox == null)
             {
-                isComplete = DBKeeper.Instance.DBObject<B_Group>().Add(new global::Server.Local.Group
+                isComplete = ServerKeeper.Instance.DBLocalKeeper.DBObject<B_Group>().Add(new global::Server.DBLocal.Group
                 {
                     Name = GVM.Name,
                     Describe = GVM.Describe
@@ -52,7 +53,7 @@ namespace ReportApp.Panel
             }
             else
             {
-                isComplete = DBKeeper.Instance.DBObject<B_Group>().Update(new global::Server.Local.Group
+                isComplete = ServerKeeper.Instance.DBLocalKeeper.DBObject<B_Group>().Update(new global::Server.DBLocal.Group
                 {
                     Id = checkedBox.Id,
                     Name = GVM.Name,
@@ -61,7 +62,7 @@ namespace ReportApp.Panel
             }
             if (isComplete)
             {
-                GVM.Groups = DBKeeper.Instance.DBObject<B_Group>().SelectAll();
+                GVM.Groups = ServerKeeper.Instance.DBLocalKeeper.DBObject<B_Group>().SelectAll();
                 if (checkedBox != null)
                 {
                     GroupList.SelectedItem = checkedBox;
@@ -81,9 +82,9 @@ namespace ReportApp.Panel
             if (checkedBox == null)
                 return;
 
-            if (DBKeeper.Instance.DBObject<B_Group>().Delete(new global::Server.Local.Group { Id = checkedBox.Id }))
+            if (ServerKeeper.Instance.DBLocalKeeper.DBObject<B_Group>().Delete(new global::Server.DBLocal.Group { Id = checkedBox.Id }))
             {
-                GVM.Groups = DBKeeper.Instance.DBObject<B_Group>().SelectAll();
+                GVM.Groups = ServerKeeper.Instance.DBLocalKeeper.DBObject<B_Group>().SelectAll();
             }
         }
     }

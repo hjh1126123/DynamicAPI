@@ -1,7 +1,8 @@
 ﻿using Quartz;
-using Server.Local;
-using Server.Net;
+using Server.DBLocal;
 using System.Collections.Generic;
+using System.Data;
+using Newtonsoft.Json;
 
 namespace Server.Quartz.Jobs
 {
@@ -9,17 +10,16 @@ namespace Server.Quartz.Jobs
     {
         public void Execute(IJobExecutionContext context)
         {
-            List<DMsSQL> dMsSQLs = DBKeeper.Instance.DBObject<D_MsSQL>().Select();
-            foreach(var dMsSql in dMsSQLs)
+            List<DMsSQL> dMsSQLs = ServerKeeper.Instance.DBLocalKeeper.DBObject<D_MsSQL>().Select();
+            foreach (var dMsSql in dMsSQLs)
             {
-                List<SqlParameterModel> sqlParameterModels = new List<SqlParameterModel>();
-                string[] pids = dMsSql.Paramskey.Split(',');
-                foreach(var pid in pids)
+                DataTable dataTable = ServerKeeper.Instance.DBNetKeeper.Select(dMsSql.Sql, new List<string>(dMsSql.Paramskey.Split(',')));
+                if (!dMsSql.Strategy.Equals("不选择"))
                 {
-
+                    ServerKeeper.Instance.StrategyKeeper.Strategys[dMsSql.Strategy].Strategy.Operator(dataTable);
                 }
-
-                //ConnNet.Instance.Select(dMsSql.Sql,new List<SqlParameterModel>);
+                DData dData = ServerKeeper.Instance.DBLocalKeeper.DBObject<D_Data>().Add(dMsSql.Aid, JsonConvert.SerializeObject(dataTable));
+                ServerKeeper.Instance.DBLocalKeeper.DBObject<I_Api>().Update(new Api { ApiId = dMsSql.Apiid, Did = dData.Did });
             }
         }
     }
