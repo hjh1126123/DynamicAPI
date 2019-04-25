@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Server.DBLocal
 {
     public class ApiAndData : DBComponent
     {
-        public object SelectData(string requestKey, params string[] parvls)
+        public object SelectData(string requestKey, Dictionary<string,string> @params = null)
         {
             return Context(db =>
             {
@@ -16,14 +17,18 @@ namespace Server.DBLocal
                 {
                     data = JsonConvert.DeserializeObject(db.DDatas.Where(i => i.Did.Equals(api.Did)).FirstOrDefault().Data);
                 }
-                else
+                else if (api.Pattern.Equals("即时查询"))
                 {
                     string commandText = db.DMsSQLs.Where(i => i.Sid.Equals(api.Sid)).FirstOrDefault().Sql;
-                    
+                    data = null;
+                }
+                else
+                {
+                    data = null;
                 }
 
 
-                //return data;
+                return data;
             });
         }
     }

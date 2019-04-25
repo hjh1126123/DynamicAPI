@@ -100,6 +100,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\ApiKepper.cs" />
+    <Compile Include="API\ApiPermissionFilter.cs" />
+    <Compile Include="API\ApiResultModel.cs" />
+    <Compile Include="API\Controls\RequestApi.cs" />
     <Compile Include="IServer.cs" />
     <Compile Include="DBLocal\Components\D_Conn.cs" />
     <Compile Include="DBLocal\Components\T_Token.cs" />
@@ -163,9 +167,7 @@
       <Name>Tool</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="API\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
