@@ -37,13 +37,13 @@ namespace Server.DBLocal
         /// <returns></returns>
         public BActive Add(Active active)
         {
-            if (string.IsNullOrWhiteSpace(active.Name) || string.IsNullOrWhiteSpace(active.Describe))
-            {                
-                return null;
-            }
-
             return Context(db =>
             {
+                if (string.IsNullOrWhiteSpace(active.Name) || string.IsNullOrWhiteSpace(active.Describe))
+                {
+                    return null;
+                }
+
                 var bActive = new BActive
                 {
                     Aid = TRandom.Instance.GetRandomString(10),

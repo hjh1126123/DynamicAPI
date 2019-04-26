@@ -15,7 +15,9 @@ namespace Server.DBNet
     /// 数据控制器
     /// </summary>
     public class DBNetKeeper : IServer
-    {        
+    {
+        #region 连接池相关
+
         private struct SQL
         {
             public string key;
@@ -143,39 +145,51 @@ namespace Server.DBNet
             }
         }
 
+        #endregion
+
+        #region 参数相关
+
+        /// <summary>
+        /// 将SQL多参数查询的key进行格式替换，并添加对应参数
+        /// </summary>
+        /// <param name="sqlCommand"></param>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        private void ReplaceSQLAndAddParameters(SqlCommand sqlCommand, string key, List<string> @value)
+        {
+            string SQL = "(";
+            for (int count = 0; count < @value.Count; count++)
+            {
+                string tmpKey = $"{key}{count}";
+                SQL += tmpKey;
+                if (count < @value.Count - 1)
+                    SQL += ',';
+
+                sqlCommand.Parameters.Add(new SqlParameter(tmpKey, @value[count]));
+            }
+            SQL += ")";
+
+            sqlCommand.CommandText = sqlCommand.CommandText.Replace("key", SQL);
+        }
 
         /// <summary>
         /// 添加参数
         /// </summary>
         /// <param name="sqlCommand"></param>
         /// <param name="model"></param>
-        private void AddParameters(SqlCommand sqlCommand, List<string> pids)
+        private void AddParametersFromPid(SqlCommand sqlCommand, List<string> pIds)
         {
-            foreach (var pid in pids)
+            foreach (var pid in pIds)
             {
-                BParam bPar = serverKeeper.DBLocalKeeper.DBObject<B_Params>().Select(pid);
-                IParams iPar = null;
-                if (ParamsSave.ContainsKey(bPar.Key))
-                {            
-                    iPar = ParamsSave[bPar.Key];
-                }
-                else
-                    continue;
+                BParam bPar = serverKeeper.DBLocalKeeper.DBObject<B_Params>().Select(pid, null);
 
+                if (!ParamsSave.ContainsKey(bPar.Key))
+                    continue;
+                IParams iPar = ParamsSave[bPar.Key];
 
                 if (bPar.Multiple.GetValueOrDefault())
                 {
-                    string parKeys = "(";
-                    for (int count = 0; count < iPar.GetValues().Count; count++)
-                    {
-                        string tmpKey = $"{bPar.Key}{count}";
-                        sqlCommand.Parameters.Add(new SqlParameter(tmpKey, iPar.GetValues()[count]));
-                        parKeys += tmpKey;
-                        if (count < iPar.GetValues().Count - 1)
-                            parKeys += ',';
-                    }
-                    parKeys += ")";
-                    sqlCommand.CommandText = sqlCommand.CommandText.Replace(bPar.Key, parKeys);
+                    ReplaceSQLAndAddParameters(sqlCommand, bPar.Key, iPar.GetValues());
                 }
                 else
                 {
@@ -185,18 +199,30 @@ namespace Server.DBNet
         }
 
         /// <summary>
-        /// 执行查询带参数
+        /// 添加参数
         /// </summary>
-        /// <param name="data">数据内容</param>
-        /// <param name="params">参数</param>
-        /// <returns></returns>
-        public DataTable Select(string SQL, List<string> pids)
+        /// <param name="sqlCommand"></param>
+        /// <param name="pNames"></param>
+        private void AddParametersFromName(SqlCommand sqlCommand, Dictionary<string, List<string>> @params)
         {
-            return Select(SQL, sqlcommand =>
-             {
-                 AddParameters(sqlcommand, pids);
-             });            
+            foreach (var key in @params.Keys)
+            {
+                BParam bParam = serverKeeper.DBLocalKeeper.DBObject<B_Params>().Select(null, key);
+
+                if (bParam.Multiple.GetValueOrDefault())
+                {
+                    ReplaceSQLAndAddParameters(sqlCommand, bParam.Key, @params[key]);
+                }
+                else
+                {
+                    sqlCommand.Parameters.Add(new SqlParameter(bParam.Key, @params[key][0]));
+                }
+            }
         }
+
+        #endregion
+
+        #region 查询相关（对外方法）
 
         /// <summary>
         /// 执行查询不带参数
@@ -204,7 +230,7 @@ namespace Server.DBNet
         /// <param name="SQL"></param>
         /// <param name="action"></param>
         /// <returns></returns>
-        public DataTable Select(string SQL, Action<SqlCommand> action = null)
+        private DataTable Select(string SQL, Action<SqlCommand> action = null)
         {
             SQL sQL = OpenConn();
             SqlCommand sqlCommand = null;
@@ -243,10 +269,35 @@ namespace Server.DBNet
         }
 
         /// <summary>
+        /// 执行查询带参数
+        /// </summary>
+        /// <param name="data">数据内容</param>
+        /// <param name="params">参数</param>
+        /// <returns></returns>
+        public DataTable Select(string SQL, List<string> pids)
+        {
+            return Select(SQL, sqlcommand =>
+             {
+                 AddParametersFromPid(sqlcommand, pids);
+             });
+        }
+
+        public DataTable Select(string SQL, Dictionary<string, List<string>> @params)
+        {
+            return Select(SQL, sqlCommand =>
+            {
+                AddParametersFromName(sqlCommand, @params);
+            });
+        }
+
+        #endregion
+
+        #region 构造方法和基础参数
+
+        /// <summary>
         /// 参数保存
         /// </summary>
-        public ConcurrentDictionary<string, IParams> ParamsSave;
-        
+        private ConcurrentDictionary<string, IParams> ParamsSave;
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -265,9 +316,11 @@ namespace Server.DBNet
             ParamsSave = new ConcurrentDictionary<string, IParams>();
             //参数导入
             foreach (var item in TReflection.Instance.GetClasses<IParams>("Server.Net.ParamsComponents"))
-            {                
+            {
                 ParamsSave.AddOrUpdate(item.GetKey(), item, (o_k, o_v) => item);
             }
         }
+
+        #endregion
     }
 }

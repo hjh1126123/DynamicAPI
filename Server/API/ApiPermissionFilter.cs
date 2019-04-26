@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+using Newtonsoft.Json.Linq;
 
 namespace Server.API
 {
@@ -14,9 +15,9 @@ namespace Server.API
         {
             base.OnActionExecuting(actionContext);
 
-            ApiResultModel apiResultModel = new ApiResultModel();
+            ApiResponseModel apiResultModel = new ApiResponseModel();
             apiResultModel.HttpStatusCode = System.Net.HttpStatusCode.Unauthorized;
-            apiResultModel.IsSuccess = false;
+            apiResultModel.IsSuccess = false;            
             
             if (actionContext.Request.Headers.Contains("token"))
             {
@@ -25,7 +26,7 @@ namespace Server.API
                 if (pass)
                 {                    
                     apiResultModel.HttpStatusCode = actionContext.Response.StatusCode;
-                    apiResultModel.Data = actionContext.Response.Content.ReadAsAsync<object>().Result;
+                    apiResultModel.Data = actionContext.Response.Content.ReadAsAsync<JObject>().Result;
                     apiResultModel.IsSuccess = actionContext.Response.IsSuccessStatusCode;                    
                 }
                 else

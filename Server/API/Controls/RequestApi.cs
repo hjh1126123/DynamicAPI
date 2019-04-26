@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
-using Server.DBLocal;
+﻿using Server.DBLocal;
 using System.Web.Http;
+using Newtonsoft.Json.Linq;
 
 namespace Server.API.Controls
 {
@@ -8,20 +8,9 @@ namespace Server.API.Controls
     public class RequestApi : ApiController
     {
         [HttpPost]
-        public object GetData([FromBody] JObject obj)
+        public JObject GetData([FromBody] ApiRequestModel request)
         {
-            if (obj.ContainsKey("api"))
-            {
-                return ServerKeeper.Instance.DBLocalKeeper.DBObject<ApiAndData>().SelectData(obj["api"].Value<string>());
-            }
-            else
-            {
-                return new
-                {
-                    name = "错误",
-                    message = "找不到对应的obj"
-                };
-            }
+            return ServerKeeper.Instance.DBLocalKeeper.DBObject<ApiAndData>().SelectData(request.RequestKey, request.Params);
         }
     }
 }

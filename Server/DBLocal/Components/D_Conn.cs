@@ -9,11 +9,11 @@ namespace Server.DBLocal
     {
         public bool Add(string name, string conn)
         {
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(conn))
-                return false;
-
             return Context(db =>
             {
+                if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(conn))
+                    return false;
+
                 DConn dConn = new DConn
                 {
                     Cid = TRandom.Instance.GetRandomString(20),

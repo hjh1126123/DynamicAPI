@@ -42,7 +42,7 @@ namespace Server.DBLocal
         /// </summary>
         /// <param name="pid">pid</param>
         /// <returns></returns>
-        public BParam Select(string pid)
+        public BParam Select(string pid, string name)
         {
             return Context(db =>
             {

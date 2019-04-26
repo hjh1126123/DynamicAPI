@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LinqKit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Tool;
@@ -79,23 +80,19 @@ namespace Server.DBLocal
         {
             return Context(db =>
             {
-                IApi iApi;
+                var predicate = PredicateBuilder.New<IApi>();
                 if (api.Id != null)
                 {
-                    iApi = db.IApis.Where(i => i.Id == api.Id.GetValueOrDefault()).FirstOrDefault();
-                    if (iApi == null)
-                        return false;
+                    predicate = predicate.And(i => i.Id == api.Id.GetValueOrDefault());
                 }
-
                 if (!string.IsNullOrWhiteSpace(api.ApiId))
                 {
-                    iApi = db.IApis.Where(i => i.Apiid.Equals(api.ApiId)).FirstOrDefault();
+                    predicate = predicate.And(i => i.Apiid.Equals(api.ApiId));
                 }
-                else
-                {
+                if (predicate.Parameters.Count <= 0)
                     return false;
-                }
 
+                IApi iApi = db.IApis.AsExpandable().Where(predicate).FirstOrDefault();
 
                 iApi.Apiname = string.IsNullOrWhiteSpace(api.ApiName) ? iApi.Apiname : api.ApiName;
                 iApi.RequestKey = string.IsNullOrWhiteSpace(api.RequestKey) ? iApi.RequestKey : api.RequestKey;

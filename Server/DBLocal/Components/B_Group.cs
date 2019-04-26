@@ -13,7 +13,7 @@ namespace Server.DBLocal
 
         public long Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
-        public string Describe { get => describe; set => describe = value; }        
+        public string Describe { get => describe; set => describe = value; }
     }
 
     public class B_Group : DBComponent
@@ -37,16 +37,16 @@ namespace Server.DBLocal
         /// <returns></returns>
         public bool Add(Group group)
         {
-            if (string.IsNullOrWhiteSpace(group.Name))
-                return false;
-
             return Context(db =>
             {
+                if (string.IsNullOrWhiteSpace(group.Name))
+                    return false;
+
                 db.BGroups.InsertOnSubmit(new BGroup
                 {
                     Gid = TRandom.Instance.GetRandomString(10),
                     Gname = group.Name,
-                    Gdescribe = group.Describe,                    
+                    Gdescribe = group.Describe,
                     Operator = "hjh",
                     Createtime = DateTime.Now,
                     Systime = DateTime.Now
@@ -80,7 +80,7 @@ namespace Server.DBLocal
                 return true;
             });
         }
-        
+
         /// <summary>
         /// 删除数据
         /// </summary>
