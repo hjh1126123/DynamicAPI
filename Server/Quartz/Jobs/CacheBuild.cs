@@ -15,7 +15,7 @@ namespace Server.Quartz.Jobs
             {
                 DataTable dataTable = ServerKeeper.Instance.DBNetKeeper.Select(dMsSql.Sql, new List<string>(dMsSql.Paramskey.Split(',')));
                 if (!dMsSql.Strategy.Equals("不选择"))
-                {
+                {                    
                     ServerKeeper.Instance.StrategyKeeper.Strategys[dMsSql.Strategy].Strategy.Operator(dataTable);
                 }
                 DData dData = ServerKeeper.Instance.DBLocalKeeper.DBObject<D_Data>().Add(dMsSql.Aid, JsonConvert.SerializeObject(dataTable));

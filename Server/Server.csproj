@@ -133,6 +133,7 @@
     <Compile Include="DBLocal\Components\B_Params.cs" />
     <Compile Include="DBLocal\Components\D_MsSQL.cs" />
     <Compile Include="DBNet\DBNetKeeper.cs" />
+    <Compile Include="Strategy\StrategyComponents\H.cs" />
     <Compile Include="Strategy\StrategyKeeper.cs" />
     <Compile Include="Strategy\StrategyModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
